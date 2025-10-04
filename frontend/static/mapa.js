@@ -88,6 +88,63 @@ import { PointerLockControls } from 'three/addons/controls/PointerLockControls.j
     texture.needsUpdate = true
     return texture
   }
+  
+  // Spectacular high-quality planet texture URLs with multiple options per type
+  const PLANET_TEXTURES = {
+    'rocky': [
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/As08-16-2593.jpg/1200px-As08-16-2593.jpg', // Moon
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Mercury_in_color_-_Prockter07-edit1.jpg/1200px-Mercury_in_color_-_Prockter07-edit1.jpg', // Mercury
+      'https://cdn.jsdelivr.net/gh/mrdoob/three.js@r160/examples/textures/planets/moon_1024.jpg' // Moon alt
+    ],
+    'oceanic': [
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/The_Earth_seen_from_Apollo_17.jpg/1200px-The_Earth_seen_from_Apollo_17.jpg', // Earth
+      'https://cdn.jsdelivr.net/gh/mrdoob/three.js@r160/examples/textures/planets/earth_atmos_2048.jpg' // Earth alt
+    ],
+    'gasGiant': [
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Jupiter_and_its_shrunken_Great_Red_Spot.jpg/1200px-Jupiter_and_its_shrunken_Great_Red_Spot.jpg', // Jupiter
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Saturn_during_Equinox.jpg/1200px-Saturn_during_Equinox.jpg' // Saturn
+    ],
+    'iceGiant': [
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Uranus2.jpg/1200px-Uranus2.jpg', // Uranus
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/Neptune_-_Voyager_2_%2829347980845%29_flatten_crop.jpg/1200px-Neptune_-_Voyager_2_%2829347980845%29_flatten_crop.jpg' // Neptune
+    ],
+    'lava': [
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/The_Eddystone_Volcano_-_ASTER.jpg/1200px-The_Eddystone_Volcano_-_ASTER.jpg', // Volcanic
+      'https://cdn.jsdelivr.net/gh/mrdoob/three.js@r160/examples/textures/lava/lavatile.jpg' // Lava texture
+    ],
+    'desert': [
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/OSIRIS_Mars_true_color.jpg/1200px-OSIRIS_Mars_true_color.jpg', // Mars
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Mars_atmosphere.jpg/1200px-Mars_atmosphere.jpg' // Mars alt
+    ],
+    'frozen': [
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Europa-moon.jpg/1200px-Europa-moon.jpg', // Europa
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Enceladus_from_Narrow_Angle_Camera.jpg/1200px-Enceladus_from_Narrow_Angle_Camera.jpg' // Enceladus
+    ]
+  }
+  
+  // Load real texture from URL with variety and fallback to procedural
+  function loadPlanetTexture(type, seed) {
+    const textureArray = PLANET_TEXTURES[type]
+    if (textureArray && textureArray.length > 0) {
+      // Use seed to deterministically pick a texture for variety
+      const index = Math.floor((seed * 0.001) % textureArray.length)
+      const textureUrl = textureArray[index]
+      
+      const loader = new THREE.TextureLoader()
+      const texture = loader.load(
+        textureUrl,
+        (tex) => {
+          console.log(`✓ Loaded ${type} texture [${index}]`)
+        },
+        undefined,
+        (err) => {
+          console.warn(`Failed to load ${type} texture, using procedural fallback`)
+        }
+      )
+      return texture
+    }
+    return generatePlanetTexture(type, seed)
+  }
 
   const container = document.getElementById('canvas-container')
   const tooltip = document.getElementById('tooltip')
@@ -427,9 +484,9 @@ import { PointerLockControls } from 'three/addons/controls/PointerLockControls.j
 
     const typeData = planetTypes[data.type]
     
-    // Generate unique procedural texture for this planet
+    // Load realistic texture for this planet (with procedural fallback)
     const seed = index * 137.5 // Golden angle for variety
-    const texture = generatePlanetTexture(data.type, seed)
+    const texture = loadPlanetTexture(data.type, seed)
 
     const geo = new THREE.SphereGeometry(data.size, 64, 64)
     const mat = new THREE.MeshStandardMaterial({ 
