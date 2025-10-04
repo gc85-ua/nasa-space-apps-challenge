@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-  <title>Comunidad - Cosmic Explorer</title>
+  <title>Community - Cosmic Explorer</title>
   <link href="https://fonts.googleapis.com" rel="preconnect" />
   <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&amp;display=swap"
@@ -33,6 +33,61 @@
       },
     };
   </script>
+  <style>
+    @keyframes rocket-fly {
+      0% {
+        opacity: 0;
+        transform: translate(0, 0) scale(0.5);
+      }
+      20% {
+        opacity: 1;
+      }
+      80% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+        transform: translate(300px, -250px) scale(1.2) rotate(45deg);
+      }
+    }
+    .rocket-animation {
+      position: absolute;
+      animation: rocket-fly 1.5s ease-in-out forwards;
+    }
+    @keyframes fade-in-out-pop {
+      0% {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+      20% {
+        opacity: 1;
+        transform: scale(1.1);
+      }
+      80% {
+        opacity: 1;
+        transform: scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+    }
+    .congrats-animation {
+       position: absolute;
+       animation: fade-in-out-pop 1.5s ease-in-out forwards;
+    }
+    @keyframes rank-glow {
+      0%, 100% {
+        box-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
+      }
+      50% {
+        box-shadow: 0 0 24px rgba(19, 19, 236, 0.7), 0 0 12px rgba(19, 19, 236, 0.5);
+      }
+    }
+    .ranking-glow-animation {
+      animation: rank-glow 0.5s ease-in-out 3;
+    }
+  </style>
 </head>
 
 <body class="font-display bg-background-light dark:bg-background-dark text-gray-900 dark:text-white">
@@ -67,18 +122,18 @@
 </header>
 
 <main class="flex-1">
-<div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+<div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
   <div class="flex flex-col md:flex-row gap-8">
 
     <!-- Main Content (3/4 width) -->
     <div class="w-full md:w-3/4">
-      <div class="text-center mb-12">
+      <div class="text-center mb-6">
         <h2 class="text-3xl sm:text-4xl font-bold tracking-tighter">Train our model</h2>
         <p class="mt-2 text-gray-500 dark:text-gray-400">Upload your own dataset in CSV format to improve the algorithm.</p>
       </div>
 
       <!-- Upload Form -->
-      <div class="bg-white dark:bg-background-dark border border-gray-200 dark:border-gray-800 rounded-lg p-6 mb-8">
+      <div class="bg-white dark:bg-background-dark border border-gray-200 dark:border-gray-800 rounded-lg p-4 mb-6">
         <form id="upload-form">
           <div>
             <label for="csv-file" class="block text-sm font-medium mb-2">CSV file with the dataset</label>
@@ -96,19 +151,23 @@
 
       <!-- Report Section -->
       <div id="report-section" class="hidden bg-white dark:bg-background-dark border border-gray-200 dark:border-gray-800 rounded-lg p-6">
+        <div class="relative h-16">
+          <div id="rocket-placeholder" class="text-6xl" style="position: absolute; top: 50%; left: 25%; opacity: 0; transform: translateY(-50%);">🚀</div>
+          <div id="congrats-placeholder" class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-3xl font-bold text-yellow-300 tracking-wider" style="opacity: 0; text-shadow: 0 0 10px #fde047;">CONGRATULATIONS</div>
+        </div>
         <h3 class="text-2xl font-bold tracking-tighter mb-4">Training Results</h3>
-        <div class="space-y-4">
+        <div class="flex justify-around text-center">
           <div>
-            <h4 class="font-semibold">Trained Parameters</h4>
-            <p class="text-gray-500 dark:text-gray-400">`max_depth`, `n_estimators`, `learning_rate`</p>
+            <h4 class="font-semibold text-sm text-gray-500 dark:text-gray-400">New agent accuracy</h4>
+            <p id="agent-accuracy" class="text-primary font-bold text-2xl">92.3%</p>
           </div>
           <div>
-            <h4 class="font-semibold">Improvement over current algorithm</h4>
-            <p class="text-green-400 font-bold text-lg">+5.8%</p>
+            <h4 class="font-semibold text-sm text-gray-500 dark:text-gray-400">Improvement</h4>
+            <p class="text-green-400 font-bold text-2xl">+5.8%</p>
           </div>
           <div>
-            <h4 class="font-semibold">New agent accuracy percentage</h4>
-            <p class="text-primary font-bold text-xl">92.3%</p>
+            <h4 class="font-semibold text-sm text-gray-500 dark:text-gray-400">Trained Parameters</h4>
+            <p class="text-gray-400 dark:text-gray-500 text-lg">`max_depth`, `n_estimators`, `learning_rate`</p>
           </div>
         </div>
       </div>
@@ -116,9 +175,9 @@
 
     <!-- Right Sidebar (1/4 width) -->
     <div class="w-full md:w-1/4">
-      <div class="bg-white dark:bg-background-dark border border-gray-200 dark:border-gray-800 rounded-lg p-6">
+      <div id="ranking-card" class="bg-white dark:bg-background-dark border border-gray-200 dark:border-gray-800 rounded-lg p-6">
         <h3 class="text-xl font-bold mb-4">🏆 Community Ranking</h3>
-        <ul class="space-y-4">
+        <ul id="ranking-list" class="space-y-4">
           <li class="flex items-center justify-between">
             <span class="font-semibold">1. AstroJuan</span>
             <span class="text-green-400 font-bold">94.1%</span>
@@ -132,15 +191,11 @@
             <span class="text-green-400 font-bold">92.5%</span>
           </li>
           <li class="flex items-center justify-between">
-            <span class="font-semibold">4. Your Agent</span>
-            <span class="text-primary font-bold">92.3%</span>
-          </li>
-          <li class="flex items-center justify-between">
-            <span class="font-semibold">5. NovaSeeker</span>
+            <span class="font-semibold">4. NovaSeeker</span>
             <span class="text-gray-400">89.9%</span>
           </li>
            <li class="flex items-center justify-between">
-            <span class="font-semibold">6. GalaxyExplorer</span>
+            <span class="font-semibold">5. GalaxyExplorer</span>
             <span class="text-gray-400">88.2%</span>
           </li>
         </ul>
@@ -161,13 +216,78 @@
 <script>
   document.getElementById("upload-form").addEventListener("submit", function(event) {
     event.preventDefault();
-    // For demonstration purposes, we'll just show the report section.
-    // In a real application, you would handle the file upload here.
     const fileInput = document.getElementById("csv-file");
     if (fileInput.files.length > 0) {
+      // 1. Show the report
       document.getElementById("report-section").classList.remove("hidden");
+
+      // 2. Animate the rocket and text
+      const rocket = document.getElementById("rocket-placeholder");
+      const congrats = document.getElementById("congrats-placeholder");
+      const rankingCard = document.getElementById("ranking-card");
+      rocket.classList.add("rocket-animation");
+      congrats.classList.add("congrats-animation");
+
+      // 3. After rocket animation, update ranking
+      setTimeout(() => {
+        rankingCard.classList.add("ranking-glow-animation");
+        
+        // Get the new score
+        const accuracyEl = document.getElementById("agent-accuracy");
+        const newScoreText = accuracyEl.textContent;
+        const newScore = parseFloat(newScoreText.replace('%', ''));
+
+        // Find the ranking list and remove old user agent if it exists
+        const rankingList = document.getElementById("ranking-list");
+        const oldUserAgent = document.getElementById("user-agent-rank");
+        if (oldUserAgent) {
+          oldUserAgent.remove();
+        }
+
+        // Create the new list item for the user agent
+        const newUserAgent = document.createElement("li");
+        newUserAgent.id = "user-agent-rank";
+        newUserAgent.className = "flex items-center justify-between";
+        newUserAgent.innerHTML = `
+          <span class="font-semibold">Your Agent</span>
+          <span class="text-primary font-bold">${newScoreText}</span>
+        `;
+
+        // Find the correct position and insert the new item
+        let inserted = false;
+        const competitors = rankingList.querySelectorAll("li");
+        for (let i = 0; i < competitors.length; i++) {
+          const competitorScoreText = competitors[i].querySelector("span:last-child").textContent;
+          const competitorScore = parseFloat(competitorScoreText.replace('%', ''));
+          if (newScore > competitorScore) {
+            rankingList.insertBefore(newUserAgent, competitors[i]);
+            inserted = true;
+            break;
+          }
+        }
+        if (!inserted) {
+          rankingList.appendChild(newUserAgent);
+        }
+
+        // Re-number the list
+        const allRanks = rankingList.querySelectorAll("li");
+        allRanks.forEach((rank, index) => {
+          const rankName = rank.querySelector("span:first-child");
+          const currentName = rankName.textContent.replace(/^\d+\. /, '');
+          rankName.textContent = `${index + 1}. ${currentName}`;
+        });
+
+        // Clean up animations
+        setTimeout(() => {
+            rocket.classList.remove("rocket-animation");
+            congrats.classList.remove("congrats-animation");
+            rankingCard.classList.remove("ranking-glow-animation");
+        }, 1500);
+
+      }, 1500); // Match the rocket animation duration
+
     } else {
-      alert("Por favor, selecciona un fichero CSV.");
+      alert("Please select a CSV file.");
     }
   });
 </script>
