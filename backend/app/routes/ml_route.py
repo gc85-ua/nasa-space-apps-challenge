@@ -16,15 +16,15 @@ async def predict(body: dict):
     planet_equilibrium_temp_kelvin = body.get("planet_equilibrium_temp_kelvin")
     stellar_surface_gravity_log10_cm_s2 = body.get("stellar_surface_gravity_log10_cm_s2")
     if None in [orbit_period_days, stellar_radius_sun, stellar_effective_temp_kelvin, planet_equilibrium_temp_kelvin, stellar_surface_gravity_log10_cm_s2]:
-        return Response(content=json.dumps({"error": "Missing one or more required features in the request body."}), status_code=400)
+        return Response(content=json.dumps({"error": "Missing one or more required features in the request body."}), status_code=400, media_type="application/json")
     
     features = [[orbit_period_days, stellar_radius_sun, stellar_effective_temp_kelvin, planet_equilibrium_temp_kelvin, stellar_surface_gravity_log10_cm_s2]]
     features = np.array(features)
     try:
         prediction = model.predict(features)
-        return Response(content=json.dumps({"prediction": "CANDIDATE" if prediction[0]==1 else "NOT A CANDIDATE"}), status_code=200)
+        return Response(content=json.dumps({"prediction": "CANDIDATE" if prediction[0]==1 else "NOT A CANDIDATE"}), status_code=200, media_type="application/json")
     except Exception as e:
-        return Response(content=json.dumps({"error": str(e)}), status_code=500)
+        return Response(content=json.dumps({"error": str(e)}), status_code=500, media_type="application/json")
 
     """
     curl example:
@@ -53,8 +53,9 @@ async def predict_query(
 
         return Response(
             content=json.dumps(response),
-            status_code=200
+            status_code=200,
+            media_type="application/json"
         )
     except Exception as e:
         error_message = {"error": str(e)}
-        return Response(content=json.dumps(error_message), status_code=500)
+        return Response(content=json.dumps(error_message), status_code=500, media_type="application/json")
