@@ -1,0 +1,10 @@
+{
+  "ra_hms": {
+    "method": "hms_to_deg",
+    "new_name": "ra_deg"
+  },
+  "dec_dms": {
+    "method": "dms_to_deg",
+    "new_name": "dec_deg"
+  }
+}
