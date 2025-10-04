@@ -46,7 +46,7 @@ fi
 echo "Frontend and API Docker images built successfully."
 echo "Starting containers with docker-compose..."
 
-if ! docker-compose up -d ; then
+if ! docker compose up -d ; then
     echo "Failed to start containers with docker-compose."
     exit 1
 fi
