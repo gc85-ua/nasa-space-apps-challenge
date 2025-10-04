@@ -49,10 +49,10 @@
 <h1 class="text-xl font-bold tracking-tighter">Cosmic Explorer</h1>
 </div>
 <nav class="hidden md:flex items-center gap-6">
-<a class="text-sm font-medium hover:text-primary transition-colors" href="/inicio">Inicio</a>
-<a class="text-sm font-medium hover:text-primary transition-colors" href="/mapa">Explorar</a>
-<a class="text-sm font-medium hover:text-primary transition-colors" href="/buscar">Buscar</a>
-<a class="text-sm font-medium hover:text-primary transition-colors" href="/comunidad">Comunidad</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="/">Home</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="/mapa">Explore</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="/buscar">Search</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="/comunidad">Community</a>
 </nav>
 <div class="flex items-center gap-4">
 <button class="p-2 rounded-full text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
@@ -73,22 +73,22 @@
     <!-- Main Content (3/4 width) -->
     <div class="w-full md:w-3/4">
       <div class="text-center mb-12">
-        <h2 class="text-3xl sm:text-4xl font-bold tracking-tighter">Entrena a nuestro modelo</h2>
-        <p class="mt-2 text-gray-500 dark:text-gray-400">Sube tu propio dataset en formato CSV para mejorar el algoritmo.</p>
+        <h2 class="text-3xl sm:text-4xl font-bold tracking-tighter">Train our model</h2>
+        <p class="mt-2 text-gray-500 dark:text-gray-400">Upload your own dataset in CSV format to improve the algorithm.</p>
       </div>
 
       <!-- Upload Form -->
       <div class="bg-white dark:bg-background-dark border border-gray-200 dark:border-gray-800 rounded-lg p-6 mb-8">
         <form id="upload-form">
           <div>
-            <label for="csv-file" class="block text-sm font-medium mb-2">Fichero CSV con el dataset</label>
+            <label for="csv-file" class="block text-sm font-medium mb-2">CSV file with the dataset</label>
             <input type="file" id="csv-file" name="csv-file" accept=".csv"
               class="form-input w-full rounded-lg border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary file:text-white hover:file:bg-primary/90">
           </div>
           <div class="text-center mt-6">
             <button type="submit"
               class="inline-flex items-center justify-center rounded-lg px-6 py-3 text-sm font-bold text-white bg-primary hover:bg-primary/90 transition-colors">
-              🧠 Entrenar y generar informe
+              🧠 Train and generate report
             </button>
           </div>
         </form>
@@ -96,18 +96,18 @@
 
       <!-- Report Section -->
       <div id="report-section" class="hidden bg-white dark:bg-background-dark border border-gray-200 dark:border-gray-800 rounded-lg p-6">
-        <h3 class="text-2xl font-bold tracking-tighter mb-4">Resultados del entrenamiento</h3>
+        <h3 class="text-2xl font-bold tracking-tighter mb-4">Training Results</h3>
         <div class="space-y-4">
           <div>
-            <h4 class="font-semibold">Parámetros entrenados</h4>
+            <h4 class="font-semibold">Trained Parameters</h4>
             <p class="text-gray-500 dark:text-gray-400">`max_depth`, `n_estimators`, `learning_rate`</p>
           </div>
           <div>
-            <h4 class="font-semibold">Mejora sobre el algoritmo actual</h4>
+            <h4 class="font-semibold">Improvement over current algorithm</h4>
             <p class="text-green-400 font-bold text-lg">+5.8%</p>
           </div>
           <div>
-            <h4 class="font-semibold">Porcentaje de aciertos del nuevo agente</h4>
+            <h4 class="font-semibold">New agent accuracy percentage</h4>
             <p class="text-primary font-bold text-xl">92.3%</p>
           </div>
         </div>
@@ -117,7 +117,7 @@
     <!-- Right Sidebar (1/4 width) -->
     <div class="w-full md:w-1/4">
       <div class="bg-white dark:bg-background-dark border border-gray-200 dark:border-gray-800 rounded-lg p-6">
-        <h3 class="text-xl font-bold mb-4">🏆 Ranking de la comunidad</h3>
+        <h3 class="text-xl font-bold mb-4">🏆 Community Ranking</h3>
         <ul class="space-y-4">
           <li class="flex items-center justify-between">
             <span class="font-semibold">1. AstroJuan</span>
@@ -128,11 +128,11 @@
             <span class="text-green-400 font-bold">93.8%</span>
           </li>
           <li class="flex items-center justify-between">
-            <span class="font-semibold">3. CometaHalley</span>
+            <span class="font-semibold">3. CometHailey</span>
             <span class="text-green-400 font-bold">92.5%</span>
           </li>
           <li class="flex items-center justify-between">
-            <span class="font-semibold">4. Tu Agente</span>
+            <span class="font-semibold">4. Your Agent</span>
             <span class="text-primary font-bold">92.3%</span>
           </li>
           <li class="flex items-center justify-between">
