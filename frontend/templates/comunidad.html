@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Community - Cosmic Explorer</title>
+  <link href="https://fonts.googleapis.com" rel="preconnect" />
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&amp;display=swap"
+    rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: "#1313ec",
+            "background-light": "#f6f6f8",
+            "background-dark": "#101022",
+          },
+          fontFamily: {
+            display: ["Space Grotesk"],
+          },
+          borderRadius: {
+            DEFAULT: "0.5rem",
+            lg: "1rem",
+            xl: "1.5rem",
+            full: "9999px",
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    @keyframes rocket-fly {
+      0% {
+        opacity: 0;
+        transform: translate(0, 0) scale(0.5);
+      }
+      20% {
+        opacity: 1;
+      }
+      80% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+        transform: translate(300px, -250px) scale(1.2) rotate(45deg);
+      }
+    }
+    .rocket-animation {
+      position: absolute;
+      animation: rocket-fly 1.5s ease-in-out forwards;
+    }
+    @keyframes fade-in-out-pop {
+      0% {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+      20% {
+        opacity: 1;
+        transform: scale(1.1);
+      }
+      80% {
+        opacity: 1;
+        transform: scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+    }
+    .congrats-animation {
+       position: absolute;
+       animation: fade-in-out-pop 1.5s ease-in-out forwards;
+    }
+    @keyframes rank-glow {
+      0%, 100% {
+        box-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
+      }
+      50% {
+        box-shadow: 0 0 24px rgba(19, 19, 236, 0.7), 0 0 12px rgba(19, 19, 236, 0.5);
+      }
+    }
+    .ranking-glow-animation {
+      animation: rank-glow 0.5s ease-in-out 3;
+    }
+  </style>
+</head>
+
+<body class="font-display bg-background-light dark:bg-background-dark text-gray-900 dark:text-white">
+<div class="flex flex-col min-h-screen">
+<header class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-lg">
+<div class="container mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex items-center justify-between h-16 border-b border-gray-200 dark:border-gray-800">
+<div class="flex items-center gap-4">
+<div class="size-8 text-primary">
+<svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M39.475 21.6262C40.358 21.4363 40.6863 21.5589 40.7581 21.5934C40.7876 21.655 40.8547 21.857 40.8082 22.3336C40.7408 23.0255 40.4502 24.0046 39.8572 25.2301C38.6799 27.6631 36.5085 30.6631 33.5858 33.5858C30.6631 36.5085 27.6632 38.6799 25.2301 39.8572C24.0046 40.4502 23.0255 40.7407 22.3336 40.8082C21.8571 40.8547 21.6551 40.7875 21.5934 40.7581C21.5589 40.6863 21.4363 40.358 21.6262 39.475C21.8562 38.4054 22.4689 36.9657 23.5038 35.2817C24.7575 33.2417 26.5497 30.9744 28.7621 28.762C30.9744 26.5497 33.2417 24.7574 35.2817 23.5037C36.9657 22.4689 38.4054 21.8562 39.475 21.6262ZM4.41189 29.2403L18.7597 43.5881C19.8813 44.7097 21.4027 44.9179 22.7217 44.7893C24.0585 44.659 25.5148 44.1631 26.9723 43.4579C29.9052 42.0387 33.2618 39.5667 36.4142 36.4142C39.5667 33.2618 42.0387 29.9052 43.4579 26.9723C44.1631 25.5148 44.659 24.0585 44.7893 22.7217C44.9179 21.4027 44.7097 19.8813 43.5881 18.7597L29.2403 4.41187C27.8527 3.02428 25.8765 3.02573 24.2861 3.36776C22.6081 3.72863 20.7334 4.58419 18.8396 5.74801C16.4978 7.18716 13.9881 9.18353 11.5858 11.5858C9.18354 13.988 7.18717 16.4978 5.74802 18.8396C4.58421 20.7334 3.72865 22.6081 3.36778 24.2861C3.02574 25.8765 3.02429 27.8527 4.41189 29.2403Z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+<h1 class="text-xl font-bold tracking-tighter">Cosmic Explorer</h1>
+</div>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-sm font-medium hover:text-primary transition-colors" href="/">Home</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="/mapa">Explore</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="/buscar">Search</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="/comunidad">Community</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="/model">Model</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-full text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+<svg fill="currentColor" height="20" viewBox="0 0 256 256" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M221.8,175.94C216.25,166.38,208,139.33,208,104a80,80,0,1,0-160,0c0,35.34-8.26,62.38-13.81,71.94A16,16,0,0,0,48,200H88.81a40,40,0,0,0,78.38,0H208a16,16,0,0,0,13.8-24.06ZM128,216a24,24,0,0,1-22.62-16h45.24A24,24,0,0,1,128,216ZM48,184c7.7-13.24,16-43.92,16-80a64,64,0,1,1,128,0c0,36.05,8.28,66.73,16,80Z"></path>
+</svg>
+</button>
+<div class="size-10 rounded-full bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBrLpPCHU1eGQtBO8G17pWP-xFAdYx2v7TJENhbjy-jgYFpUSU2mZbcZELR4MzjF4H81YWIvKhbTgu3xXXQkAwOGAZjYkiDvn13Z0wLrIwEbSlD9t6Xj5qvFINNblGpbib6sjpLI3MjttN2E_txYp3h_CwNDVVqCJqgxAcArmQeM1mL-8SUiPXBZgXuBytxFpnCEAJi4ku7Goi-IZvoQerk1yi7FCbEIneGEjo0-GYhMEwCUc89yfLVa-Vh40aQiDlZKCYyqVFo1Bo");'></div>
+</div>
+</div>
+</div>
+</header>
+
+<main class="flex-1">
+<div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+  <div class="flex flex-col md:flex-row gap-8">
+
+    <!-- Main Content (3/4 width) -->
+    <div class="w-full md:w-3/4">
+      <div class="text-center mb-6">
+        <h2 class="text-3xl sm:text-4xl font-bold tracking-tighter">Train our model</h2>
+        <p class="mt-2 text-gray-500 dark:text-gray-400">Upload your own dataset in CSV format to improve the algorithm.</p>
+      </div>
+
+      <!-- Upload Form -->
+      <div class="bg-white dark:bg-background-dark border border-gray-200 dark:border-gray-800 rounded-lg p-4 mb-6">
+        <form id="upload-form">
+          <div>
+            <label for="csv-file" class="block text-sm font-medium mb-2">CSV file with the dataset</label>
+            <input type="file" id="csv-file" name="csv-file" accept=".csv"
+              class="form-input w-full rounded-lg border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary file:text-white hover:file:bg-primary/90">
+          </div>
+          <div class="text-center mt-6">
+            <button type="submit"
+              class="inline-flex items-center justify-center rounded-lg px-6 py-3 text-sm font-bold text-white bg-primary hover:bg-primary/90 transition-colors">
+              🧠 Train and generate report
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Report Section -->
+      <div id="report-section" class="hidden bg-white dark:bg-background-dark border border-gray-200 dark:border-gray-800 rounded-lg p-6">
+        <div class="relative h-16">
+          <div id="rocket-placeholder" class="text-6xl" style="position: absolute; top: 50%; left: 25%; opacity: 0; transform: translateY(-50%);">🚀</div>
+          <div id="congrats-placeholder" class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-3xl font-bold text-yellow-300 tracking-wider" style="opacity: 0; text-shadow: 0 0 10px #fde047;">CONGRATULATIONS</div>
+        </div>
+        <h3 class="text-2xl font-bold tracking-tighter mb-4">Training Results</h3>
+        <div class="flex justify-around text-center">
+          <div>
+            <h4 class="font-semibold text-sm text-gray-500 dark:text-gray-400">New agent accuracy</h4>
+            <p id="agent-accuracy" class="text-primary font-bold text-2xl">92.3%</p>
+          </div>
+          <div>
+            <h4 class="font-semibold text-sm text-gray-500 dark:text-gray-400">Improvement</h4>
+            <p class="text-green-400 font-bold text-2xl">+5.8%</p>
+          </div>
+          <div>
+            <h4 class="font-semibold text-sm text-gray-500 dark:text-gray-400">Trained Parameters</h4>
+            <p class="text-gray-400 dark:text-gray-500 text-lg">`max_depth`, `n_estimators`, `learning_rate`</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Sidebar (1/4 width) -->
+    <div class="w-full md:w-1/4">
+      <div id="ranking-card" class="bg-white dark:bg-background-dark border border-gray-200 dark:border-gray-800 rounded-lg p-6">
+        <h3 class="text-xl font-bold mb-4">🏆 Community Ranking</h3>
+        <ul id="ranking-list" class="space-y-4">
+          <li class="flex items-center justify-between">
+            <span class="font-semibold">1. AstroJuan</span>
+            <span class="text-green-400 font-bold">94.1%</span>
+          </li>
+          <li class="flex items-center justify-between">
+            <span class="font-semibold">2. StarGazer_22</span>
+            <span class="text-green-400 font-bold">93.8%</span>
+          </li>
+          <li class="flex items-center justify-between">
+            <span class="font-semibold">3. CometHailey</span>
+            <span class="text-green-400 font-bold">92.5%</span>
+          </li>
+          <li class="flex items-center justify-between">
+            <span class="font-semibold">4. NovaSeeker</span>
+            <span class="text-gray-400">89.9%</span>
+          </li>
+           <li class="flex items-center justify-between">
+            <span class="font-semibold">5. GalaxyExplorer</span>
+            <span class="text-gray-400">88.2%</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</div>
+</main>
+
+<footer class="bg-background-light dark:bg-background-dark border-t border-gray-200 dark:border-gray-800">
+<div class="container mx-auto px-4 sm:px-6 lg:px-8 py-6 text-center text-sm text-gray-500 dark:text-gray-400">
+<p>© 2024 Cosmic Explorer. All rights reserved.</p>
+</div>
+</footer>
+</div>
+
+<script>
+  document.getElementById("upload-form").addEventListener("submit", function(event) {
+    event.preventDefault();
+    const fileInput = document.getElementById("csv-file");
+    if (fileInput.files.length > 0) {
+      // 1. Show the report
+      document.getElementById("report-section").classList.remove("hidden");
+
+      // 2. Animate the rocket and text
+      const rocket = document.getElementById("rocket-placeholder");
+      const congrats = document.getElementById("congrats-placeholder");
+      const rankingCard = document.getElementById("ranking-card");
+      rocket.classList.add("rocket-animation");
+      congrats.classList.add("congrats-animation");
+
+      // 3. After rocket animation, update ranking
+      setTimeout(() => {
+        rankingCard.classList.add("ranking-glow-animation");
+        
+        // Get the new score
+        const accuracyEl = document.getElementById("agent-accuracy");
+        const newScoreText = accuracyEl.textContent;
+        const newScore = parseFloat(newScoreText.replace('%', ''));
+
+        // Find the ranking list and remove old user agent if it exists
+        const rankingList = document.getElementById("ranking-list");
+        const oldUserAgent = document.getElementById("user-agent-rank");
+        if (oldUserAgent) {
+          oldUserAgent.remove();
+        }
+
+        // Create the new list item for the user agent
+        const newUserAgent = document.createElement("li");
+        newUserAgent.id = "user-agent-rank";
+        newUserAgent.className = "flex items-center justify-between";
+        newUserAgent.innerHTML = `
+          <span class="font-semibold">Your Agent</span>
+          <span class="text-primary font-bold">${newScoreText}</span>
+        `;
+
+        // Find the correct position and insert the new item
+        let inserted = false;
+        const competitors = rankingList.querySelectorAll("li");
+        for (let i = 0; i < competitors.length; i++) {
+          const competitorScoreText = competitors[i].querySelector("span:last-child").textContent;
+          const competitorScore = parseFloat(competitorScoreText.replace('%', ''));
+          if (newScore > competitorScore) {
+            rankingList.insertBefore(newUserAgent, competitors[i]);
+            inserted = true;
+            break;
+          }
+        }
+        if (!inserted) {
+          rankingList.appendChild(newUserAgent);
+        }
+
+        // Re-number the list
+        const allRanks = rankingList.querySelectorAll("li");
+        allRanks.forEach((rank, index) => {
+          const rankName = rank.querySelector("span:first-child");
+          const currentName = rankName.textContent.replace(/^\d+\. /, '');
+          rankName.textContent = `${index + 1}. ${currentName}`;
+        });
+
+        // Clean up animations
+        setTimeout(() => {
+            rocket.classList.remove("rocket-animation");
+            congrats.classList.remove("congrats-animation");
+            rankingCard.classList.remove("ranking-glow-animation");
+        }, 1500);
+
+      }, 1500); // Match the rocket animation duration
+
+    } else {
+      alert("Please select a CSV file.");
+    }
+  });
+</script>
+
+</body>
+</html>

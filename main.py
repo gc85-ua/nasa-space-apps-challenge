@@ -19,5 +19,13 @@ def detalles():
 def mapa():
     return render_template('mapa.html')
 
+@app.route('/comunidad')
+def comunidad():
+    return render_template('comunidad.html')
+
+@app.route('/model')
+def model():
+    return render_template('model.html')
+
 if __name__ == '__main__':
     app.run(debug=True)
