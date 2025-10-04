@@ -1,18 +1,31 @@
 {
-  "pl_orbper": "period_days",
-  "pl_trandurh": "duration_hr",
-  "pl_trandep": "depth_ppm",
-  "pl_tranmid": "t0_bjd",
-  "tfopwg_disp": "tfopwg",
-  "st_tmag": "tmag",
-  "st_teff": "teff_k",
-  "st_logg": "logg_cgs",
-  "st_rad": "rstar_rsun",
-  "pl_rade": "rpl_re",
-  "pl_insol": "insol_earth",
-  "pl_eqt": "teq_k",
-  "ra": "ra_deg",
-  "dec": "dec_deg",
-  "rastr": "ra_hms",
-  "decstr": "dec_dms"
+  "pl_orbper": "period",
+  "koi_period": "period",
+
+  "pl_rade": "depth",
+  "pl_trandep": "depth",
+  "pl_radj" : "depth",
+  "koi_depth" : "depth",
+
+  "pl_trandurh" : "duration",
+  "koi_duration" : "duration",
+
+  "pl_pubdate": "discovery_date",
+  "rowupdate": "discovery_date",
+  "pl_tranmid": "discovery_date",
+  "koi_timeObk" : "discovery_date",
+
+  "disposition": "disposition",
+  "tfopwg_disp": "disposition",
+  "koi_disposition" : "disposition",
+
+  "sy_vmag": "magnitude",
+  "koi_kepmag": "magnitude",
+  "st_tmag": "magnitude",
+
+  "st_teff": "stellar_effective_temp",
+  "koi_steff": "stellar_effective_temp",
+
+  "pl_orbsmax": "semi_major_axis",
+  "koi_impact": "semi_major_axis"
 }
