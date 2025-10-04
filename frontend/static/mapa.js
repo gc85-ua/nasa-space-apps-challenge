@@ -243,12 +243,12 @@ import { PointerLockControls } from 'three/addons/controls/PointerLockControls.j
   const earth = new THREE.Mesh(earthGeom, earthMat)
   earth.position.set(0, 0, 0)
   earth.userData = { 
-    name: 'Tierra', 
+    name: 'Earth', 
     radius: '1.0 R⊕', 
     mass: '1.0 M⊕',
-    distance: '0 años luz', 
-    type: 'Rocoso',
-    habitable: 'Sí'
+    distance: '0 light years', 
+    type: 'Rocky',
+    habitable: 'Yes'
   }
   scene.add(earth)
 
@@ -517,14 +517,14 @@ import { PointerLockControls } from 'three/addons/controls/PointerLockControls.j
     // Determine habitability zone (simplified - based on distance and type)
     let habitable = 'No'
     if ((data.type === 'oceanic' || data.type === 'rocky') && data.size > 4 && data.size < 10) {
-      habitable = 'Posible'
+      habitable = 'Possible'
     }
     
     mesh.userData = {
       name: data.name,
       radius: (data.size / 6).toFixed(2) + ' R⊕',
       mass: estimatedMass + ' M⊕',
-      distance: data.distLY.toFixed(0) + ' años luz',
+      distance: data.distLY.toFixed(0) + ' light years',
       type: data.type.charAt(0).toUpperCase() + data.type.slice(1),
       habitable: habitable
     }
@@ -568,19 +568,19 @@ import { PointerLockControls } from 'three/addons/controls/PointerLockControls.j
         ${data.name}
       </div>
       <div style="display: grid; grid-template-columns: auto 1fr; gap: 8px 16px; font-size: 13px;">
-        <div style="color: rgba(255,255,255,0.6);">Tipo:</div>
+        <div style="color: rgba(255,255,255,0.6);">Type:</div>
         <div style="color: #4da6ff; font-weight: 600;">${data.type}</div>
         
-        <div style="color: rgba(255,255,255,0.6);">Radio:</div>
+        <div style="color: rgba(255,255,255,0.6);">Radius:</div>
         <div style="color: #fff;">${data.radius}</div>
         
-        <div style="color: rgba(255,255,255,0.6);">Masa est.:</div>
+        <div style="color: rgba(255,255,255,0.6);">Est. Mass:</div>
         <div style="color: #fff;">${data.mass}</div>
         
-        <div style="color: rgba(255,255,255,0.6);">Distancia:</div>
+        <div style="color: rgba(255,255,255,0.6);">Distance:</div>
         <div style="color: #ff9933; font-weight: 600;">${data.distance}</div>
         
-        <div style="color: rgba(255,255,255,0.6);">Habitabilidad:</div>
+        <div style="color: rgba(255,255,255,0.6);">Habitability:</div>
         <div style="color: ${habitableColor}; font-weight: 600;">${data.habitable}</div>
       </div>
     `
@@ -773,7 +773,7 @@ import { PointerLockControls } from 'three/addons/controls/PointerLockControls.j
   instructions.style.zIndex = '100'
   instructions.style.backdropFilter = 'blur(8px)'
   instructions.style.border = '1px solid rgba(77, 166, 255, 0.3)'
-  instructions.innerHTML = 'Haz clic para empezar • WASD: Movimiento • Espacio/Ctrl: Subir/Bajar • Shift: TURBO • Ratón: Mirar alrededor'
+  instructions.innerHTML = 'Click to start • WASD: Movement • Space/Ctrl: Up/Down • Shift: TURBO • Mouse: Look around'
   document.body.appendChild(instructions)
   
   controls.addEventListener('lock', () => {
