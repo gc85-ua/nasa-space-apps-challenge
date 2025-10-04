@@ -10,11 +10,11 @@ router = APIRouter()
 
 @router.post("/predict")
 async def predict(body: dict):
-    orbit_period_days = body.get("orbit_period_days")
-    stellar_radius_sun = body.get("stellar_radius_sun")
-    stellar_effective_temp_kelvin = body.get("stellar_effective_temp_kelvin")
-    planet_equilibrium_temp_kelvin = body.get("planet_equilibrium_temp_kelvin")
-    stellar_surface_gravity_log10_cm_s2 = body.get("stellar_surface_gravity_log10_cm_s2")
+    orbit_period_days = float(body.get("orbit_period_days"))
+    stellar_radius_sun = float(body.get("stellar_radius_sun"))
+    stellar_effective_temp_kelvin = float(body.get("stellar_effective_temp_kelvin"))
+    planet_equilibrium_temp_kelvin = float(body.get("planet_equilibrium_temp_kelvin"))
+    stellar_surface_gravity_log10_cm_s2 = float(body.get("stellar_surface_gravity_log10_cm_s2"))
     if None in [orbit_period_days, stellar_radius_sun, stellar_effective_temp_kelvin, planet_equilibrium_temp_kelvin, stellar_surface_gravity_log10_cm_s2]:
         return Response(content=json.dumps({"error": "Missing one or more required features in the request body."}), status_code=400, media_type="application/json")
     
