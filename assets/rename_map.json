@@ -1,0 +1,18 @@
+{
+  "pl_orbper": "period_days",
+  "pl_trandurh": "duration_hr",
+  "pl_trandep": "depth_ppm",
+  "pl_tranmid": "t0_bjd",
+  "tfopwg_disp": "tfopwg",
+  "st_tmag": "tmag",
+  "st_teff": "teff_k",
+  "st_logg": "logg_cgs",
+  "st_rad": "rstar_rsun",
+  "pl_rade": "rpl_re",
+  "pl_insol": "insol_earth",
+  "pl_eqt": "teq_k",
+  "ra": "ra_deg",
+  "dec": "dec_deg",
+  "rastr": "ra_hms",
+  "decstr": "dec_dms"
+}
