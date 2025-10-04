@@ -58,6 +58,38 @@
       }
     </style>
 </head>
+
+<script>
+  document.getElementById("planet-form").addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const data = {
+      pl_rade: parseFloat(document.getElementById("pl_rade").value),
+      pl_orbper: parseFloat(document.getElementById("pl_orbper").value),
+      st_teff: parseFloat(document.getElementById("st_teff").value)
+    };
+
+    const response = await fetch("/api/predict", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
+    });
+
+    const result = await response.json();
+
+    // Muestra el resultado dinámicamente
+    const outputDiv = document.createElement("div");
+    outputDiv.className = "mt-6 p-4 rounded-lg border bg-white dark:bg-gray-800 text-center";
+    outputDiv.innerHTML = `
+      <h3 class="text-xl font-bold">Resultado</h3>
+      <p class="mt-2">${result.prediction ? "🌍 Planeta potencialmente habitable" : "❌ No habitable"}</p>
+    `;
+
+    document.querySelector("main .container").appendChild(outputDiv);
+  });
+</script>
+
+
 <body class="font-display bg-background-light dark:bg-background-dark text-gray-900 dark:text-white">
 <div class="flex flex-col min-h-screen">
 <header class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-lg">
@@ -96,7 +128,33 @@
 <p class="mt-2 text-gray-500 dark:text-gray-400">Define los parámetros para descubrir nuevos mundos.</p>
 </div>
 <div class="bg-white dark:bg-background-dark border border-gray-200 dark:border-gray-800 rounded-lg p-6 mb-12">
-<form class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+
+
+<form id="planet-form" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+  <div>
+    <label for="pl_rade" class="block text-sm font-medium mb-2">Radio del planeta (pl_rade)</label>
+    <input type="number" step="any" id="pl_rade" name="pl_rade" class="form-input w-full rounded-lg border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800" placeholder="Ej: 1.2" required>
+  </div>
+  <div>
+    <label for="pl_orbper" class="block text-sm font-medium mb-2">Periodo orbital (pl_orbper)</label>
+    <input type="number" step="any" id="pl_orbper" name="pl_orbper" class="form-input w-full rounded-lg border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800" placeholder="Ej: 365" required>
+  </div>
+  <div>
+    <label for="st_teff" class="block text-sm font-medium mb-2">Temperatura de la estrella (st_teff)</label>
+    <input type="number" step="any" id="st_teff" name="st_teff" class="form-input w-full rounded-lg border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800" placeholder="Ej: 5778" required>
+  </div>
+  <div class="md:col-span-2 text-center">
+    <button type="submit" class="inline-flex items-center justify-center rounded-lg px-6 py-3 text-sm font-bold text-white bg-primary hover:bg-primary/90 transition-colors">
+      🚀 Escanear
+    </button>
+  </div>
+</form>
+
+
+
+  <!--
+  <form class="grid grid-cols-1 md:grid-cols-2 gap-6">
 <div>
 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2" for="star-type">Tipo de Estrella</label>
 <input class="form-input w-full rounded-lg border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 focus:ring-primary focus:border-primary transition" id="star-type" placeholder="Ej: G2V (Similar al Sol)" type="text"/>
@@ -111,7 +169,8 @@
                     Escanear
                   </button>
 </div>
-</form>
+</form>-->
+
 </div>
 <div class="text-center mb-8">
 <h3 class="text-2xl sm:text-3xl font-bold tracking-tighter">Resultados del Escaneo</h3>
