@@ -1,0 +1,3 @@
+id,period_days,depth_ppm,duration_hr,snr,odd_even_ok,secondary_ok,centroid_ok,score
+TOI-1234,3.52,600,2.1,9.8,1,1,1,0.87
+TOI-9999,0.85,8500,1.0,6.1,0,0,0,0.12
