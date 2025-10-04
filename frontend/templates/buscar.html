@@ -104,10 +104,10 @@
 <h1 class="text-xl font-bold tracking-tighter">Cosmic Explorer</h1>
 </div>
 <nav class="hidden md:flex items-center gap-6">
-<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Inicio</a>
-<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Explorar</a>
-<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Misiones</a>
-<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Comunidad</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Home</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="/mapa">Explore</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Missions</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Community</a>
 </nav>
 <div class="flex items-center gap-4">
 <button class="p-2 rounded-full text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
@@ -124,8 +124,8 @@
 <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
 <div class="max-w-2xl mx-auto">
 <div class="text-center mb-12">
-<h2 class="text-3xl sm:text-4xl font-bold tracking-tighter">Iniciar Escaneo</h2>
-<p class="mt-2 text-gray-500 dark:text-gray-400">Define los parámetros para descubrir nuevos mundos.</p>
+<h2 class="text-3xl sm:text-4xl font-bold tracking-tighter">Start Scan</h2>
+<p class="mt-2 text-gray-500 dark:text-gray-400">Define the parameters to discover new worlds.</p>
 </div>
 <div class="bg-white dark:bg-background-dark border border-gray-200 dark:border-gray-800 rounded-lg p-6 mb-12">
 
@@ -133,20 +133,20 @@
 
 <form id="planet-form" class="grid grid-cols-1 md:grid-cols-2 gap-6">
   <div>
-    <label for="pl_rade" class="block text-sm font-medium mb-2">Radio del planeta (pl_rade)</label>
-    <input type="number" step="any" id="pl_rade" name="pl_rade" class="form-input w-full rounded-lg border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800" placeholder="Ej: 1.2" required>
+    <label for="pl_rade" class="block text-sm font-medium mb-2">Planet Radius (pl_rade)</label>
+    <input type="number" step="any" id="pl_rade" name="pl_rade" class="form-input w-full rounded-lg border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800" placeholder="Ex: 1.2" required>
   </div>
   <div>
-    <label for="pl_orbper" class="block text-sm font-medium mb-2">Periodo orbital (pl_orbper)</label>
-    <input type="number" step="any" id="pl_orbper" name="pl_orbper" class="form-input w-full rounded-lg border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800" placeholder="Ej: 365" required>
+    <label for="pl_orbper" class="block text-sm font-medium mb-2">Orbital Period (pl_orbper)</label>
+    <input type="number" step="any" id="pl_orbper" name="pl_orbper" class="form-input w-full rounded-lg border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800" placeholder="Ex: 365" required>
   </div>
   <div>
-    <label for="st_teff" class="block text-sm font-medium mb-2">Temperatura de la estrella (st_teff)</label>
-    <input type="number" step="any" id="st_teff" name="st_teff" class="form-input w-full rounded-lg border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800" placeholder="Ej: 5778" required>
+    <label for="st_teff" class="block text-sm font-medium mb-2">Star Temperature (st_teff)</label>
+    <input type="number" step="any" id="st_teff" name="st_teff" class="form-input w-full rounded-lg border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800" placeholder="Ex: 5778" required>
   </div>
   <div class="md:col-span-2 text-center">
     <button type="submit" class="inline-flex items-center justify-center rounded-lg px-6 py-3 text-sm font-bold text-white bg-primary hover:bg-primary/90 transition-colors">
-      🚀 Escanear
+      🚀 Scan
     </button>
   </div>
 </form>
@@ -173,7 +173,7 @@
 
 </div>
 <div class="text-center mb-8">
-<h3 class="text-2xl sm:text-3xl font-bold tracking-tighter">Resultados del Escaneo</h3>
+<h3 class="text-2xl sm:text-3xl font-bold tracking-tighter">Scan Results</h3>
 </div>
 <div class="space-y-6">
 <div class="bg-white dark:bg-background-dark border border-gray-200 dark:border-gray-800 rounded-lg p-4 flex items-center gap-4 hover:border-primary/50 dark:hover:border-primary/50 transition-all duration-300 scanning-animation">
@@ -182,7 +182,7 @@
 </div>
 <div class="flex-1">
 <h4 class="text-lg font-bold">Kepler-186f</h4>
-<p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Un exoplaneta rocoso en la zona habitable de su estrella, similar a la Tierra.</p>
+<p class="text-sm text-gray-500 dark:text-gray-400 mt-1">A rocky exoplanet in the habitable zone of its star, similar to Earth.</p>
 </div>
 </div>
 <div class="bg-white dark:bg-background-dark border border-gray-200 dark:border-gray-800 rounded-lg p-4 flex items-center gap-4 hover:border-primary/50 dark:hover:border-primary/50 transition-all duration-300 scanning-animation" style="animation-delay: 0.5s;">
@@ -191,7 +191,7 @@
 </div>
 <div class="flex-1">
 <h4 class="text-lg font-bold">GJ 667 Cc</h4>
-<p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Una super-Tierra en la zona habitable de una estrella enana roja, con potencial para agua líquida.</p>
+<p class="text-sm text-gray-500 dark:text-gray-400 mt-1">A super-Earth in the habitable zone of a red dwarf star, with potential for liquid water.</p>
 </div>
 </div>
 <div class="bg-white dark:bg-background-dark border border-gray-200 dark:border-gray-800 rounded-lg p-4 flex items-center gap-4 hover:border-primary/50 dark:hover:border-primary/50 transition-all duration-300 scanning-animation" style="animation-delay: 1s;">
@@ -200,7 +200,7 @@
 </div>
 <div class="flex-1">
 <h4 class="text-lg font-bold">Proxima Centauri b</h4>
-<p class="text-sm text-gray-500 dark:text-gray-400 mt-1">El exoplaneta más cercano a nuestro sistema solar, orbitando una estrella enana roja.</p>
+<p class="text-sm text-gray-500 dark:text-gray-400 mt-1">The closest exoplanet to our solar system, orbiting a red dwarf star.</p>
 </div>
 </div>
 </div>
@@ -209,7 +209,7 @@
 </main>
 <footer class="bg-background-light dark:bg-background-dark border-t border-gray-200 dark:border-gray-800">
 <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-6 text-center text-sm text-gray-500 dark:text-gray-400">
-<p>© 2024 Cosmic Explorer. Todos los derechos reservados.</p>
+<p>© 2024 Cosmic Explorer. All rights reserved.</p>
 </div>
 </footer>
 </div>
