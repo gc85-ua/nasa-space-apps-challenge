@@ -107,25 +107,51 @@
 
 
 
-<form id="planet-form" class="grid grid-cols-1 md:grid-cols-2 gap-6">
-  <div>
-    <label for="pl_rade" class="block text-sm font-medium mb-2">Radio del planeta (pl_rade)</label>
-    <input type="number" step="any" id="pl_rade" name="pl_rade" class="form-input w-full rounded-lg border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800" placeholder="Ej: 1.2" required>
-  </div>
-  <div>
-    <label for="pl_orbper" class="block text-sm font-medium mb-2">Periodo orbital (pl_orbper)</label>
-    <input type="number" step="any" id="pl_orbper" name="pl_orbper" class="form-input w-full rounded-lg border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800" placeholder="Ej: 365" required>
-  </div>
-  <div>
-    <label for="st_teff" class="block text-sm font-medium mb-2">Temperatura de la estrella (st_teff)</label>
-    <input type="number" step="any" id="st_teff" name="st_teff" class="form-input w-full rounded-lg border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800" placeholder="Ej: 5778" required>
-  </div>
-  <div class="md:col-span-2 text-center">
-    <button type="submit" class="inline-flex items-center justify-center rounded-lg px-6 py-3 text-sm font-bold text-white bg-primary hover:bg-primary/90 transition-colors">
-      🚀 Escanear
-    </button>
-  </div>
-</form>
+            <form id="planet-form" method="post" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label for="orbit_period_days" class="block text-sm font-medium mb-2">Exoplanet Orbit Period
+                  (days)</label>
+                <input type="number" step="any" id="orbit_period_days" name="orbit_period_days"
+                  class="form-input w-full rounded-lg border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800"
+                  placeholder="Ej: 1.2" required>
+              </div>
+              <div>
+                <label for="planet_equilibrium_temp_kelvin" class="block text-sm font-medium mb-2">Exoplanet Equilibrium
+                  Temperature (Kelvin)</label>
+                <input type="number" step="any" id="planet_equilibrium_temp_kelvin"
+                  name="planet_equilibrium_temp_kelvin"
+                  class="form-input w-full rounded-lg border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800"
+                  placeholder="Ej: 365" required>
+              </div>
+              <div>
+                <label for="stellar_radius_sun" class="block text-sm font-medium mb-2">Exoplanet's star radius (respect
+                  Sun's radius)</label>
+                <input type="number" step="any" id="stellar_radius_sun" name="stellar_radius_sun"
+                  class="form-input w-full rounded-lg border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800"
+                  placeholder="Ej: 1" required>
+              </div>
+              <div>
+                <label for="stellar_effective_temp_kelvin" class="block text-sm font-medium mb-2">Exoplanet's star
+                  effective temperature (Kelvin)</label>
+                <input type="number" step="any" id="stellar_effective_temp_kelvin" name="stellar_effective_temp_kelvin"
+                  class="form-input w-full rounded-lg border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800"
+                  placeholder="Ej: 5778" required>
+              </div>
+              <div>
+                <label for="stellar_surface_gravity_log10_cm_s2" class="block text-sm font-medium mb-2">Exoplanet's star
+                  surface gravity (log10 cm/s²)</label>
+                <input type="number" step="any" id="stellar_surface_gravity_log10_cm_s2"
+                  name="stellar_surface_gravity_log10_cm_s2"
+                  class="form-input w-full rounded-lg border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800"
+                  placeholder="Ej: 4.44" required>
+              </div>
+              <div class="md:col-span-2 text-center">
+                <button type="submit"
+                  class="inline-flex items-center justify-center rounded-lg px-6 py-3 text-sm font-bold text-white bg-primary hover:bg-primary/90 transition-colors">
+                  🚀 Escanear
+                </button>
+              </div>
+            </form>
 
 
 
