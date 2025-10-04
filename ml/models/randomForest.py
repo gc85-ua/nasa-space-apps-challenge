@@ -28,7 +28,7 @@ class RandomForestModel:
         # pipeline
         self.model_pipeline = Pipeline(steps=[
             ('imputer', imputer),
-            ('scaler', scaler),
+            #('scaler', scaler),
             ('classifier', randomForest)
         ])
         self.trained = False
