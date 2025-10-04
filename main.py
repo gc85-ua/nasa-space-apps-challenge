@@ -1,6 +1,18 @@
-def main():
-    print("Hello from nasa-space-apps-challenge!")
+from flask import Flask, render_template
 
+app = Flask(__name__, template_folder="frontend/templates", static_folder="frontend/static")
 
-if __name__ == "__main__":
-    main()
+@app.route('/')
+def inicio():
+    return render_template('Inicio.html')
+
+@app.route('/buscar')
+def buscar():
+    return render_template('buscar.html')
+
+@app.route('/detalles')
+def detalles():
+    return render_template('detalles.html')
+
+if __name__ == '__main__':
+    app.run(debug=True)

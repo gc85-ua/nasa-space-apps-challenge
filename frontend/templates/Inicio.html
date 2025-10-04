@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Space+Grotesk:wght@400;500;700" onload="this.rel='stylesheet'" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style type="text/tailwindcss">
+        @layer utilities {
+            @keyframes rocket-launch {
+                0% {
+                    transform: translateY(100vh) translateX(-50vw) rotate(45deg) scale(0.2);
+                    opacity: 0;
+                }
+                20% {
+                    opacity: 1;
+                }
+                100% {
+                    transform: translateY(-100vh) translateX(100vw) rotate(45deg) scale(1);
+                    opacity: 0;
+                }
+            }
+            @keyframes planet-orbit {
+                0% {
+                    transform: translateY(0) translateX(0) scale(1);
+                }
+                50% {
+                    transform: translateY(20px) translateX(15px) scale(1.05);
+                }
+                100% {
+                    transform: translateY(0) translateX(0) scale(1);
+                }
+            }
+            @keyframes pulse-glow {
+                0%, 100% {
+                    box-shadow: 0 0 10px #1313ec, 0 0 20px #1313ec;
+                    transform: scale(1);
+                }
+                50% {
+                    box-shadow: 0 0 20px #1313ec, 0 0 40px #1313ec;
+                    transform: scale(1.05);
+                }
+            }
+            .animate-rocket-1 {
+                animation: rocket-launch 15s linear infinite;
+                animation-delay: 0s;
+            }
+            .animate-rocket-2 {
+                animation: rocket-launch 20s linear infinite;
+                animation-delay: 5s;
+            }
+            .animate-rocket-3 {
+                animation: rocket-launch 12s linear infinite;
+                animation-delay: 10s;
+            }
+            .animate-planet-1 {
+                animation: planet-orbit 25s ease-in-out infinite;
+            }
+            .animate-planet-2 {
+                animation: planet-orbit 35s ease-in-out infinite;
+                animation-delay: 3s;
+            }
+             .animate-planet-3 {
+                animation: planet-orbit 45s ease-in-out infinite;
+                animation-delay: 6s;
+            }
+        }
+    </style>
+<script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#1313ec",
+              "background-light": "#f6f6f8",
+              "background-dark": "#101022",
+            },
+            fontFamily: {
+              "display": ["Space Grotesk"]
+            },
+            borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+            animation: {
+                'pulse-glow': 'pulse-glow 3s infinite ease-in-out',
+            },
+          },
+        },
+      }
+    </script>
+<title>Stitch Design</title>
+<link href="data:image/x-icon;base64," rel="icon" type="image/x-icon"/>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display">
+<div class="relative flex h-screen w-full flex-col overflow-hidden">
+<div class="absolute inset-0 z-0 bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAq1CaRobpMb029QxJ1KNfbxew9lOYrwsJAHSeqmJDvxGV-eYX4Ucrpa784zcMJ_Em-W1gnSqaOKJETFpMFCn3d3ICuVURASJFSb4ww59AvUfvCcORYSyGoNdTEMlN_PmalppSKAs-PfKzOJ8h1PeWZ3N8CTvx3pL_hk1VCnvkS49SyIDzFCVw6iqj6mjXSurdIEA60PTA8v0iBYDVj9-VX1U_vUTEeRChiFwisl-ytK0yC1Eod6PdgDzi7LH8ndl1OlqlMbumwVVI");'>
+<div class="absolute inset-0 bg-background-dark/50 dark:bg-background-dark/70"></div>
+</div>
+<div class="absolute inset-0 z-0 overflow-hidden">
+<div class="absolute top-[10%] left-[20%] h-8 w-8 rounded-full bg-blue-300/30 blur-sm animate-planet-1"></div>
+<div class="absolute top-[60%] right-[15%] h-12 w-12 rounded-full bg-red-400/20 blur-sm animate-planet-2"></div>
+<div class="absolute bottom-[20%] left-[30%] h-6 w-6 rounded-full bg-purple-300/40 blur animate-planet-3"></div>
+<div class="absolute bottom-0 left-1/2 text-white text-2xl transform -translate-x-1/2 animate-rocket-1">
+            🚀
+        </div>
+<div class="absolute bottom-0 left-1/3 text-white text-xl transform -translate-x-1/2 animate-rocket-2">
+            🚀
+        </div>
+<div class="absolute bottom-0 left-2/3 text-white text-3xl transform -translate-x-1/2 animate-rocket-3">
+            🚀
+        </div>
+</div>
+<div class="relative z-10 flex flex-1 flex-col items-center justify-center p-6 text-center">
+<div class="max-w-2xl">
+<h1 class="text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">
+                Descubre los secretos del universo
+            </h1>
+<p class="mt-6 text-lg leading-8 text-white/80">
+                Embárcate en un viaje cósmico para explorar exoplanetas y desentrañar los misterios del universo. ¿Estás
+                listo para descubrir nuevos mundos?
+            </p>
+<div class="mt-10">
+<button class="group relative inline-flex items-center justify-center overflow-hidden rounded-lg bg-primary px-8 py-3 text-base font-bold text-white shadow-lg transition-all duration-300 ease-in-out hover:scale-110 animate-pulse-glow">
+<span class="absolute inset-0 h-full w-full bg-white/20 blur-lg transition-all duration-500 ease-in-out group-hover:bg-white/30"></span>
+<span class="relative">Explorar Exoplanetas</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+
+</body></html>
