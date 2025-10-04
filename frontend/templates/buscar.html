@@ -81,7 +81,7 @@
 </div>
 <nav class="hidden md:flex items-center gap-6">
 <a class="text-sm font-medium hover:text-primary transition-colors" href="#">Inicio</a>
-<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Explorar</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="/mapa">Explorar</a>
 <a class="text-sm font-medium hover:text-primary transition-colors" href="#">Misiones</a>
 <a class="text-sm font-medium hover:text-primary transition-colors" href="#">Comunidad</a>
 </nav>
@@ -100,8 +100,8 @@
 <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
 <div class="max-w-2xl mx-auto">
 <div class="text-center mb-12">
-<h2 class="text-3xl sm:text-4xl font-bold tracking-tighter">Iniciar Escaneo</h2>
-<p class="mt-2 text-gray-500 dark:text-gray-400">Define los parámetros para descubrir nuevos mundos.</p>
+<h2 class="text-3xl sm:text-4xl font-bold tracking-tighter">Start Scan</h2>
+<p class="mt-2 text-gray-500 dark:text-gray-400">Set the parameters to discover new worlds.</p>
 </div>
 <div class="bg-white dark:bg-background-dark border border-gray-200 dark:border-gray-800 rounded-lg p-6 mb-12">
 
@@ -113,7 +113,7 @@
                   (days)</label>
                 <input type="number" step="any" id="orbit_period_days" name="orbit_period_days"
                   class="form-input w-full rounded-lg border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800"
-                  placeholder="Ej: 1.2" required>
+                  placeholder="e.g. 1.2" required>
               </div>
               <div>
                 <label for="planet_equilibrium_temp_kelvin" class="block text-sm font-medium mb-2">Exoplanet Equilibrium
@@ -121,21 +121,21 @@
                 <input type="number" step="any" id="planet_equilibrium_temp_kelvin"
                   name="planet_equilibrium_temp_kelvin"
                   class="form-input w-full rounded-lg border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800"
-                  placeholder="Ej: 365" required>
+                  placeholder="e.g. 365" required>
               </div>
               <div>
                 <label for="stellar_radius_sun" class="block text-sm font-medium mb-2">Exoplanet's star radius (respect
                   Sun's radius)</label>
                 <input type="number" step="any" id="stellar_radius_sun" name="stellar_radius_sun"
                   class="form-input w-full rounded-lg border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800"
-                  placeholder="Ej: 1" required>
+                  placeholder="e.g. 1" required>
               </div>
               <div>
                 <label for="stellar_effective_temp_kelvin" class="block text-sm font-medium mb-2">Exoplanet's star
                   effective temperature (Kelvin)</label>
                 <input type="number" step="any" id="stellar_effective_temp_kelvin" name="stellar_effective_temp_kelvin"
                   class="form-input w-full rounded-lg border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800"
-                  placeholder="Ej: 5778" required>
+                  placeholder="e.g. 5778" required>
               </div>
               <div>
                 <label for="stellar_surface_gravity_log10_cm_s2" class="block text-sm font-medium mb-2">Exoplanet's star
@@ -143,12 +143,12 @@
                 <input type="number" step="any" id="stellar_surface_gravity_log10_cm_s2"
                   name="stellar_surface_gravity_log10_cm_s2"
                   class="form-input w-full rounded-lg border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800"
-                  placeholder="Ej: 4.44" required>
+                  placeholder="e.g. 4.44" required>
               </div>
               <div class="md:col-span-2 text-center">
                 <button type="submit"
                   class="inline-flex items-center justify-center rounded-lg px-6 py-3 text-sm font-bold text-white bg-primary hover:bg-primary/90 transition-colors">
-                  🚀 Escanear
+                  🚀 Scan
                 </button>
               </div>
             </form>
@@ -175,7 +175,7 @@
 
 </div>
 <div class="text-center mb-8">
-<h3 class="text-2xl sm:text-3xl font-bold tracking-tighter">Resultados del Escaneo</h3>
+<h3 class="text-2xl sm:text-3xl font-bold tracking-tighter">Scan Results</h3>
 </div>
 <div class="space-y-6">
 <div class="bg-white dark:bg-background-dark border border-gray-200 dark:border-gray-800 rounded-lg p-4 flex items-center gap-4 hover:border-primary/50 dark:hover:border-primary/50 transition-all duration-300 scanning-animation">
@@ -184,7 +184,7 @@
 </div>
 <div class="flex-1">
 <h4 class="text-lg font-bold">Kepler-186f</h4>
-<p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Un exoplaneta rocoso en la zona habitable de su estrella, similar a la Tierra.</p>
+<p class="text-sm text-gray-500 dark:text-gray-400 mt-1">A rocky exoplanet in the habitable zone of its star, similar to Earth.</p>
 </div>
 </div>
 <div class="bg-white dark:bg-background-dark border border-gray-200 dark:border-gray-800 rounded-lg p-4 flex items-center gap-4 hover:border-primary/50 dark:hover:border-primary/50 transition-all duration-300 scanning-animation" style="animation-delay: 0.5s;">
@@ -193,7 +193,7 @@
 </div>
 <div class="flex-1">
 <h4 class="text-lg font-bold">GJ 667 Cc</h4>
-<p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Una super-Tierra en la zona habitable de una estrella enana roja, con potencial para agua líquida.</p>
+<p class="text-sm text-gray-500 dark:text-gray-400 mt-1">A super-Earth in the habitable zone of a red dwarf star, with potential for liquid water.</p>
 </div>
 </div>
 <div class="bg-white dark:bg-background-dark border border-gray-200 dark:border-gray-800 rounded-lg p-4 flex items-center gap-4 hover:border-primary/50 dark:hover:border-primary/50 transition-all duration-300 scanning-animation" style="animation-delay: 1s;">
@@ -202,7 +202,7 @@
 </div>
 <div class="flex-1">
 <h4 class="text-lg font-bold">Proxima Centauri b</h4>
-<p class="text-sm text-gray-500 dark:text-gray-400 mt-1">El exoplaneta más cercano a nuestro sistema solar, orbitando una estrella enana roja.</p>
+<p class="text-sm text-gray-500 dark:text-gray-400 mt-1">The closest exoplanet to our solar system, orbiting a red dwarf star.</p>
 </div>
 </div>
 </div>
@@ -211,7 +211,7 @@
 </main>
 <footer class="bg-background-light dark:bg-background-dark border-t border-gray-200 dark:border-gray-800">
 <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-6 text-center text-sm text-gray-500 dark:text-gray-400">
-<p>© 2024 Cosmic Explorer. Todos los derechos reservados.</p>
+<p>© 2024 Cosmic Explorer. All rights reserved.</p>
 </div>
 </footer>
 </div>
@@ -229,7 +229,7 @@
       stellar_effective_temp_kelvin: parseFloat(document.getElementById("stellar_effective_temp_kelvin").value),
       stellar_surface_gravity_log10_cm_s2: parseFloat(document.getElementById("stellar_surface_gravity_log10_cm_s2").value)
     };
-    console.log("Enviando datos:", data);
+  console.log("Sending data:", data);
     const response = await fetch("http://localhost:8000/predict", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -242,8 +242,8 @@
     const outputDiv = document.createElement("div");
     outputDiv.className = "mt-6 p-4 rounded-lg border bg-white dark:bg-gray-800 text-center";
     outputDiv.innerHTML = `
-      <h3 class="text-xl font-bold">Resultado</h3>
-      <p class="mt-2">${result.prediction ? "🌍 Planeta potencialmente habitable" : "❌ No habitable"}</p>
+  <h3 class="text-xl font-bold">Result</h3>
+  <p class="mt-2">${result.prediction ? "🌍 Potentially habitable planet" : "❌ Not habitable"}</p>
     `;
 
     document.querySelector("main .container").appendChild(outputDiv);
