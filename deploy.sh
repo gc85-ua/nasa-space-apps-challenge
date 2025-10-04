@@ -31,14 +31,14 @@ fi
 
 echo "Building frontend Docker image..."
 
-if [ ! "$(docker build -t frontend:latest -f frontend.dockerfile .)" ]; then
+if ! docker build -t frontend:latest -f frontend.dockerfile . ; then
     echo "Failed to build frontend Docker image."
     exit 1
 fi
 
 echo "Building API Docker image..."
 
-if [ ! "$(docker build -t api:latest -f api.dockerfile .)" ]; then
+if ! docker build -t api:latest -f api.dockerfile . ; then
     echo "Failed to build API Docker image."
     exit 1
 fi
@@ -46,7 +46,7 @@ fi
 echo "Frontend and API Docker images built successfully."
 echo "Starting containers with docker-compose..."
 
-if [ ! "$(docker-compose up -d)" ]; then
+if ! docker-compose up -d ; then
     echo "Failed to start containers with docker-compose."
     exit 1
 fi
