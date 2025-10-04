@@ -216,12 +216,9 @@ import { PointerLockControls } from 'three/addons/controls/PointerLockControls.j
     }
   })
 
-  // Lights
-  const ambient = new THREE.AmbientLight(0xffffff, 0.4)
+  // Lights - Reduced ambient for better sun lighting effect
+  const ambient = new THREE.AmbientLight(0xffffff, 0.15)
   scene.add(ambient)
-  const sunLight = new THREE.PointLight(0xffffdd, 2, 2000)
-  sunLight.position.set(0, 0, 0)
-  scene.add(sunLight)
 
   // EARTH at origin - blue/green colors
   const earthGeom = new THREE.SphereGeometry(6, 64, 64)
@@ -243,14 +240,58 @@ import { PointerLockControls } from 'three/addons/controls/PointerLockControls.j
   const earth = new THREE.Mesh(earthGeom, earthMat)
   earth.position.set(0, 0, 0)
   earth.userData = { 
-    name: 'Tierra', 
+    name: 'Earth', 
     radius: '1.0 R⊕', 
     mass: '1.0 M⊕',
-    distance: '0 años luz', 
-    type: 'Rocoso',
-    habitable: 'Sí'
+    distance: '0 light years', 
+    type: 'Rocky',
+    habitable: 'Yes'
   }
   scene.add(earth)
+
+  // SUN - Realistic solar texture to illuminate Earth
+  const sunGeom = new THREE.SphereGeometry(20, 64, 64)
+  const sunMat = new THREE.MeshBasicMaterial({ 
+    color: 0xffff00, // Yellow fallback
+    emissive: 0xffff00,
+    emissiveIntensity: 1.0
+  })
+  
+  // Load realistic Sun texture
+  textureLoader.load(
+    'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/The_Sun_by_the_Atmospheric_Imaging_Assembly_of_NASA%27s_Solar_Dynamics_Observatory_-_20100819.jpg/1024px-The_Sun_by_the_Atmospheric_Imaging_Assembly_of_NASA%27s_Solar_Dynamics_Observatory_-_20100819.jpg',
+    (texture) => { 
+      sunMat.map = texture
+      sunMat.needsUpdate = true 
+    },
+    undefined,
+    (error) => { console.log('Sun texture not loaded, using emissive fallback') }
+  )
+  
+  const sun = new THREE.Mesh(sunGeom, sunMat)
+  sun.position.set(-80, 30, -50) // Position Sun to illuminate Earth
+  sun.userData = {
+    name: '☀️ The Sun',
+    radius: '109 R⊕',
+    mass: '333,000 M⊕',
+    distance: '8 light-minutes',
+    type: 'G-type Main Sequence Star',
+    habitable: '// TODO: Fix bug - Star is too hot for human habitation',
+    temperature: '5,778 K (Surface) | 15,000,000 K (Core)',
+    funFact: 'Powers Earth since 4.6 billion years. No bugs reported yet! ⭐'
+  }
+  scene.add(sun)
+
+  // Directional light from the Sun - creates realistic illumination effect
+  const sunDirectionalLight = new THREE.DirectionalLight(0xffffff, 1.8)
+  sunDirectionalLight.position.copy(sun.position)
+  sunDirectionalLight.castShadow = false
+  scene.add(sunDirectionalLight)
+
+  // Point light at Sun position for nearby illumination
+  const sunPointLight = new THREE.PointLight(0xffffdd, 2.5, 500)
+  sunPointLight.position.copy(sun.position)
+  scene.add(sunPointLight)
 
   // Realistic NASA Eyes-style starfield with multiple layers
   
@@ -451,7 +492,7 @@ import { PointerLockControls } from 'three/addons/controls/PointerLockControls.j
   // Curated selection of interesting exoplanets (reduced to 18 for better visual experience)
   const exoplanetData = [
     // Star Wars inspired (Easter eggs)
-    { name: '🏜️ Tatooine', distLY: 150, size: 8.5, type: 'desert' },
+    { name: '🏜️ Tatooine', distLY: 400, size: 8.5, type: 'desert' },
     { name: '❄️ Hoth', distLY: 280, size: 7.9, type: 'frozen' },
     { name: '🌀 Bespin', distLY: 420, size: 13.3, type: 'gasGiant' },
     { name: '🌋 Mustafar', distLY: 650, size: 6.1, type: 'lava' },
@@ -517,14 +558,14 @@ import { PointerLockControls } from 'three/addons/controls/PointerLockControls.j
     // Determine habitability zone (simplified - based on distance and type)
     let habitable = 'No'
     if ((data.type === 'oceanic' || data.type === 'rocky') && data.size > 4 && data.size < 10) {
-      habitable = 'Posible'
+      habitable = 'Possible'
     }
     
     mesh.userData = {
       name: data.name,
       radius: (data.size / 6).toFixed(2) + ' R⊕',
       mass: estimatedMass + ' M⊕',
-      distance: data.distLY.toFixed(0) + ' años luz',
+      distance: data.distLY.toFixed(0) + ' light years',
       type: data.type.charAt(0).toUpperCase() + data.type.slice(1),
       habitable: habitable
     }
@@ -543,9 +584,9 @@ import { PointerLockControls } from 'three/addons/controls/PointerLockControls.j
     if (!controls.isLocked) return
     
     raycaster.setFromCamera(screenCenter, camera)
-    const intersects = raycaster.intersectObjects([earth, ...planets])
+    const intersects = raycaster.intersectObjects([earth, sun, ...planets])
     
-    if(intersects.length > 0 && intersects[0].distance < 100){
+    if(intersects.length > 0 && intersects[0].distance < 150){
       const hit = intersects[0].object
       if(hovered !== hit){
         hovered = hit
@@ -560,30 +601,61 @@ import { PointerLockControls } from 'three/addons/controls/PointerLockControls.j
   }
 
   function showTooltip(data){
-    // Color based on habitability
-    const habitableColor = data.habitable === 'Posible' ? '#00ff88' : '#999'
-    
-    tooltip.innerHTML = `
-      <div style="font-size: 20px; font-weight: 700; margin-bottom: 10px; color: #fff; border-bottom: 1px solid rgba(77, 166, 255, 0.3); padding-bottom: 8px;">
-        ${data.name}
-      </div>
-      <div style="display: grid; grid-template-columns: auto 1fr; gap: 8px 16px; font-size: 13px;">
-        <div style="color: rgba(255,255,255,0.6);">Tipo:</div>
-        <div style="color: #4da6ff; font-weight: 600;">${data.type}</div>
-        
-        <div style="color: rgba(255,255,255,0.6);">Radio:</div>
-        <div style="color: #fff;">${data.radius}</div>
-        
-        <div style="color: rgba(255,255,255,0.6);">Masa est.:</div>
-        <div style="color: #fff;">${data.mass}</div>
-        
-        <div style="color: rgba(255,255,255,0.6);">Distancia:</div>
-        <div style="color: #ff9933; font-weight: 600;">${data.distance}</div>
-        
-        <div style="color: rgba(255,255,255,0.6);">Habitabilidad:</div>
-        <div style="color: ${habitableColor}; font-weight: 600;">${data.habitable}</div>
-      </div>
-    `
+    // Check if it's the Sun - special display
+    if(data.name && data.name.includes('☀️')){
+      tooltip.innerHTML = `
+        <div style="font-size: 22px; font-weight: 700; margin-bottom: 10px; color: #ffdd00; border-bottom: 2px solid rgba(255, 221, 0, 0.5); padding-bottom: 8px; text-shadow: 0 0 10px rgba(255,221,0,0.5);">
+          ${data.name}
+        </div>
+        <div style="display: grid; grid-template-columns: auto 1fr; gap: 8px 16px; font-size: 13px;">
+          <div style="color: rgba(255,255,255,0.6);">Type:</div>
+          <div style="color: #ffaa00; font-weight: 600;">${data.type}</div>
+          
+          <div style="color: rgba(255,255,255,0.6);">Radius:</div>
+          <div style="color: #fff;">${data.radius}</div>
+          
+          <div style="color: rgba(255,255,255,0.6);">Mass:</div>
+          <div style="color: #fff;">${data.mass}</div>
+          
+          <div style="color: rgba(255,255,255,0.6);">Distance:</div>
+          <div style="color: #ff9933; font-weight: 600;">${data.distance}</div>
+          
+          <div style="color: rgba(255,255,255,0.6);">Temperature:</div>
+          <div style="color: #ff4444; font-weight: 600;">${data.temperature}</div>
+          
+          <div style="color: rgba(255,255,255,0.6);">Habitability:</div>
+          <div style="color: #00ff88; font-family: 'Courier New', monospace; font-size: 11px;">${data.habitable}</div>
+        </div>
+        <div style="margin-top: 12px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.2); color: #aaffaa; font-size: 12px; font-style: italic;">
+          ${data.funFact}
+        </div>
+      `
+    } else {
+      // Normal planet display
+      const habitableColor = data.habitable === 'Posible' ? '#00ff88' : '#999'
+      
+      tooltip.innerHTML = `
+        <div style="font-size: 20px; font-weight: 700; margin-bottom: 10px; color: #fff; border-bottom: 1px solid rgba(77, 166, 255, 0.3); padding-bottom: 8px;">
+          ${data.name}
+        </div>
+        <div style="display: grid; grid-template-columns: auto 1fr; gap: 8px 16px; font-size: 13px;">
+          <div style="color: rgba(255,255,255,0.6);">Type:</div>
+          <div style="color: #4da6ff; font-weight: 600;">${data.type}</div>
+          
+          <div style="color: rgba(255,255,255,0.6);">Radius:</div>
+          <div style="color: #fff;">${data.radius}</div>
+          
+          <div style="color: rgba(255,255,255,0.6);">Est. Mass:</div>
+          <div style="color: #fff;">${data.mass}</div>
+          
+          <div style="color: rgba(255,255,255,0.6);">Distance:</div>
+          <div style="color: #ff9933; font-weight: 600;">${data.distance}</div>
+          
+          <div style="color: rgba(255,255,255,0.6);">Habitability:</div>
+          <div style="color: ${habitableColor}; font-weight: 600;">${data.habitable}</div>
+        </div>
+      `
+    }
     tooltip.style.left = '50%'
     tooltip.style.top = '80px'
     tooltip.style.transform = 'translateX(-50%) scale(1)'
@@ -773,7 +845,7 @@ import { PointerLockControls } from 'three/addons/controls/PointerLockControls.j
   instructions.style.zIndex = '100'
   instructions.style.backdropFilter = 'blur(8px)'
   instructions.style.border = '1px solid rgba(77, 166, 255, 0.3)'
-  instructions.innerHTML = 'Haz clic para empezar • WASD: Movimiento • Espacio/Ctrl: Subir/Bajar • Shift: TURBO • Ratón: Mirar alrededor'
+  instructions.innerHTML = 'Click to start • WASD: Movement • Space/Ctrl: Up/Down • Shift: TURBO • Mouse: Look around'
   document.body.appendChild(instructions)
   
   controls.addEventListener('lock', () => {
