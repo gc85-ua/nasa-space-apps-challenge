@@ -1,0 +1,1 @@
+{"confusion_matrix": [[1002, 912], [524, 3930]], "precision": 0.7744974874371859, "cv_accuracy": 0.7707874474488476, "cv_method": "RepeatedKFold(n_splits=5, n_repeats=5)", "cv_std": 0.006968786962320598}

@@ -68,7 +68,7 @@ class RandomForestModel:
         print(f"Cross-validated accuracy: {np.mean(scores)}")
         print(f"Standard deviation of accuracy: {np.std(scores)}")
         self.trained = True
-        return {"precision": precision, "cv_accuracy": np.mean(scores), "cv_std": np.std(scores)}
+        return {"confusion_matrix": conf_mtrx.tolist(), "precision": precision, "cv_accuracy": np.mean(scores), "cv_method":"RepeatedKFold(n_splits=5, n_repeats=5)", "cv_std": np.std(scores)}
 
     def predict(self, X):
         if not self.trained:
@@ -123,3 +123,8 @@ if __name__ == "__main__":
     #best_params = rf_model.random_grid_search(target_column='disposition', not_features=[])
     #print("Best hyperparameters from random grid search: ", best_params)
     rf_model.export_model("../models/random_forest_model.joblib")
+
+    # export json
+    import json
+    with open("../models/random_forest_model_metrics.json", "w") as f:
+        json.dump(metrics, f)

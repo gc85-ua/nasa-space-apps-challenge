@@ -80,10 +80,11 @@
 <h1 class="text-xl font-bold tracking-tighter">Cosmic Explorer</h1>
 </div>
 <nav class="hidden md:flex items-center gap-6">
-<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Inicio</a>
-<a class="text-sm font-medium hover:text-primary transition-colors" href="/mapa">Explorar</a>
-<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Misiones</a>
-<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Comunidad</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="/">Home</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="/mapa">Explore</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="/buscar">Search</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="/comunidad">Community</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="/model">Model</a>
 </nav>
 <div class="flex items-center gap-4">
 <button class="p-2 rounded-full text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
@@ -158,25 +159,25 @@
             <!--
   <form class="grid grid-cols-1 md:grid-cols-2 gap-6">
 <div>
-<label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2" for="star-type">Tipo de Estrella</label>
-<input class="form-input w-full rounded-lg border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 focus:ring-primary focus:border-primary transition" id="star-type" placeholder="Ej: G2V (Similar al Sol)" type="text"/>
+<label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2" for="star-type">Star Type</label>
+<input class="form-input w-full rounded-lg border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 focus:ring-primary focus:border-primary transition" id="star-type" placeholder="e.g. G2V (Sun-like)" type="text"/>
 </div>
 <div>
-<label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2" for="distance">Distancia (Años Luz)</label>
-<input class="form-input w-full rounded-lg border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 focus:ring-primary focus:border-primary transition" id="distance" placeholder="Ej: 50" type="text"/>
+<label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2" for="distance">Distance (Light Years)</label>
+<input class="form-input w-full rounded-lg border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 focus:ring-primary focus:border-primary transition" id="distance" placeholder="e.g. 50" type="text"/>
 </div>
 <div class="md:col-span-2 text-center">
 <button class="inline-flex items-center justify-center rounded-lg px-6 py-3 text-sm font-bold text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary dark:focus:ring-offset-background-dark transition-colors" type="submit">
 <svg class="mr-2" fill="currentColor" height="20" viewBox="0 0 256 256" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M228.6,108.06,46.06,23.34A16,16,0,0,0,22,36.43V219.57a16,16,0,0,0,24.06,13.09L228.6,147.94a16,16,0,0,0,0-26.79ZM48,204.43V51.57L209.77,128Z"></path></svg>
-                    Escanear
+                    Scan
                   </button>
 </div>
 </form>-->
 
 </div>
-<div id="scan-results"></div>
 <div class="text-center mb-8">
 <h3 class="text-2xl sm:text-3xl font-bold tracking-tighter">Scan Results</h3>
+<div id="scan-results"></div>
 </div>
 <div class="space-y-6">
 <div class="bg-white dark:bg-background-dark border border-gray-200 dark:border-gray-800 rounded-lg p-4 flex items-center gap-4 hover:border-primary/50 dark:hover:border-primary/50 transition-all duration-300 scanning-animation">
@@ -246,7 +247,7 @@
     outputDiv.className = "mt-6 p-4 rounded-lg border bg-white dark:bg-gray-800 text-center";
     outputDiv.innerHTML = `
   <h3 class="text-xl font-bold">Result</h3>
-  <p class="mt-2">${prediction ==="CANDIDATE"? "🌍 Your data could be a potential exoplanet candidate" : "❌ You are not a candidate"}</p>
+  <p class="mt-2">${prediction !="NOT CANDIDATE"? "🌍 Your data could be a potential exoplanet candidate" : "❌ You are not a candidate"}</p>
     `;
 
     document.querySelector("#scan-results").appendChild(outputDiv);
