@@ -79,13 +79,7 @@
     <a class="text-sm font-medium hover:text-primary transition-colors" href="/model">Model</a>
     </nav>
     <div class="flex items-center gap-4">
-    <button class="p-2 rounded-full text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
-    <svg fill="currentColor" height="20" viewBox="0 0 256 256" width="20" xmlns="http://www.w3.org/2000/svg">
-    <path d="M221.8,175.94C216.25,166.38,208,139.33,208,104a80,80,0,1,0-160,0c0,35.34-8.26,62.38-13.81,71.94A16,16,0,0,0,48,200H88.81a40,40,0,0,0,78.38,0H208a16,16,0,0,0,13.8-24.06ZM128,216a24,24,0,0,1-22.62-16h45.24A24,24,0,0,1,128,216ZM48,184c7.7-13.24,16-43.92,16-80a64,64,0,1,1,128,0c0,36.05,8.28,66.73,16,80Z"></path>
-    </svg>
-    </button>
-    <div class="size-10 rounded-full bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBrLpPCHU1eGQtBO8G17pWP-xFAdYx2v7TJENhbjy-jgYFpUSU2mZbcZELR4MzjF4H81YWIvKhbTgu3xXXQkAwOGAZjYkiDvn13Z0wLrIwEbSlD9t6Xj5qvFINNblGpbib6sjpLI3MjttN2E_txYp3h_CwNDVVqCJqgxAcArmQeM1mL-8SUiPXBZgXuBytxFpnCEAJi4ku7Goi-IZvoQerk1yi7FCbEIneGEjo0-GYhMEwCUc89yfLVa-Vh40aQiDlZKCYyqVFo1Bo");'></div>
-    </div>
+</div>
     </div>
     </div>
   </header>
@@ -190,8 +184,8 @@
           <div class="rounded-xl border border-white/10 p-6 bg-white/5">
             <h3 class="font-semibold mb-2">Notes</h3>
             <p class="text-sm opacity-80">
-              Demo visual: el botón simula una ronda de federated learning, ilumina los enlaces (de clientes a
-              servidor) y mejora ligeramente las métricas.
+              Visual demo: the button simulates a round of federated learning, illuminates the links (from clients to
+              server) and slightly improves the metrics.
             </p>
           </div>
         </div>
@@ -215,24 +209,24 @@
       const recallBar = document.getElementById('bar-recall');
       const f1Bar = document.getElementById('bar-f1');
 
-      // 1) Anima enlaces móviles -> servidor
+      // 1) Animate links from mobile -> server
       links.forEach(p => {
         const len = p.getTotalLength();
         p.style.strokeDasharray = len;
-        p.style.strokeDashoffset = len;     // dibuja desde el inicio (móvil) hacia el final (servidor)
+        p.style.strokeDashoffset = len;     // draw from the start (mobile) to the end (server)
         p.style.setProperty('--len', len);
         p.classList.remove('flow');
         p.classList.add('active');
-        void p.getBoundingClientRect();     // reflow para reiniciar animación
+        void p.getBoundingClientRect();     // reflow to restart animation
         p.classList.add('flow');
         setTimeout(() => { p.classList.remove('active'); }, 1300);
       });
 
-      // 2) Parpadeo estable en nodos (sin scale -> no se mueven)
+      // 2) Stable blinking on nodes (no scale -> they don't move)
       nodes.forEach(n => n.classList.add('flash'));
       setTimeout(() => nodes.forEach(n => n.classList.remove('flash')), 1500);
 
-      // 3) Actualiza métricas
+      // 3) Update metrics
       setTimeout(() => {
         const oldA = parseFloat(accuracyText.textContent);
         const newA = Math.min(oldA + (Math.random()*0.2)+0.1, 99.9);
