@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800&family=Orbitron:wght@400;500;700;900&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  overflow: hidden;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+/* Epic starfield background */
+@keyframes twinkle {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+@keyframes shooting-star {
+  0% { transform: translateX(0) translateY(0); opacity: 1; }
+  100% { transform: translateX(-500px) translateY(500px); opacity: 0; }
+}
+
+@keyframes float-up {
+  0% { transform: translateY(100vh) scale(0) rotate(0deg); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(-100vh) scale(1) rotate(360deg); opacity: 0; }
+}
+
+@keyframes pulse-ring {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(2.5); opacity: 0; }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { 
+    box-shadow: 0 0 20px #00d4ff, 0 0 40px #00d4ff, 0 0 60px #00d4ff, 0 0 80px #00d4ff;
+    transform: scale(1);
+  }
+  50% { 
+    box-shadow: 0 0 30px #0066ff, 0 0 60px #0066ff, 0 0 90px #0066ff, 0 0 120px #0066ff;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes text-glow {
+  0%, 100% { text-shadow: 0 0 5px rgba(255,255,255,0.3), 0 0 10px rgba(0,212,255,0.2); }
+  50% { text-shadow: 0 0 8px rgba(255,255,255,0.4), 0 0 15px rgba(0,102,255,0.3); }
+}
+
+@keyframes slide-in-up {
+  from { transform: translateY(50px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes rotate-planet {
+  from { transform: rotate(0deg) translateX(150px) rotate(0deg); }
+  to { transform: rotate(360deg) translateX(150px) rotate(-360deg); }
+}
+
+.starfield {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(ellipse at bottom, #1B2735 0%, #090a0f 100%);
+}
+
+.star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: white;
+  border-radius: 50%;
+  animation: twinkle 3s infinite;
+}
+
+.shooting-star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: linear-gradient(to right, white, transparent);
+  border-radius: 50%;
+  animation: shooting-star 3s linear infinite;
+}
+
+.planet-orbit {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 50%;
+  animation: rotate-planet 40s linear infinite;
+}
+
+.title-cosmic {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 900;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #4facfe 75%, #00f2fe 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: text-glow 3s ease-in-out infinite;
+  letter-spacing: 2px;
+}
+
+.cosmic-button {
+  position: relative;
+  padding: 20px 60px;
+  font-size: 20px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: #fff;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  overflow: hidden;
+  box-shadow: 0 0 30px rgba(102, 126, 234, 0.8);
+  transition: all 0.3s ease;
+  animation: glow-pulse 2s infinite;
+}
+
+.cosmic-button:hover {
+  transform: scale(1.1) translateY(-5px);
+  box-shadow: 0 10px 50px rgba(102, 126, 234, 1);
+}
+
+.cosmic-button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.cosmic-button:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.pulse-ring {
+  position: absolute;
+  border: 3px solid rgba(0, 212, 255, 0.6);
+  border-radius: 50%;
+  animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+}
+
+.floating-particle {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: radial-gradient(circle, #00d4ff, transparent);
+  border-radius: 50%;
+  animation: float-up 15s linear infinite;
+  opacity: 0;
+}
+
+.stats-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 20px;
+  transition: all 0.3s ease;
+}
+
+.stats-card:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0, 212, 255, 0.3);
+}
+</style>
+
+<title>🌌 Exoplanet Explorer - Discover the Universe</title>
+</head>
+
+<body>
+
+<!-- Epic Starfield Background -->
+<div class="starfield"></div>
+
+<!-- Animated Elements Container -->
+<div style="position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 1;">
+  <!-- Shooting Stars -->
+  <div class="shooting-star" style="top: 10%; left: 80%; animation-delay: 0s;"></div>
+  <div class="shooting-star" style="top: 30%; left: 60%; animation-delay: 2s;"></div>
+  <div class="shooting-star" style="top: 50%; left: 90%; animation-delay: 4s;"></div>
+  <div class="shooting-star" style="top: 70%; left: 40%; animation-delay: 6s;"></div>
+  
+  <!-- Floating Particles -->
+  <div class="floating-particle" style="left: 10%; animation-delay: 0s;"></div>
+  <div class="floating-particle" style="left: 20%; animation-delay: 2s;"></div>
+  <div class="floating-particle" style="left: 30%; animation-delay: 4s;"></div>
+  <div class="floating-particle" style="left: 40%; animation-delay: 6s;"></div>
+  <div class="floating-particle" style="left: 50%; animation-delay: 1s;"></div>
+  <div class="floating-particle" style="left: 60%; animation-delay: 3s;"></div>
+  <div class="floating-particle" style="left: 70%; animation-delay: 5s;"></div>
+  <div class="floating-particle" style="left: 80%; animation-delay: 7s;"></div>
+  <div class="floating-particle" style="left: 90%; animation-delay: 2.5s;"></div>
+  
+  <!-- Orbital Planets -->
+  <div style="position: absolute; top: 10%; right: 10%; width: 80px; height: 80px;">
+    <div class="pulse-ring" style="width: 80px; height: 80px; animation-delay: 0s;"></div>
+    <div class="pulse-ring" style="width: 80px; height: 80px; animation-delay: 0.7s;"></div>
+    <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 50%; position: absolute; top: 10px; left: 10px; box-shadow: 0 0 30px #667eea;"></div>
+  </div>
+  
+  <div style="position: absolute; bottom: 15%; left: 8%; width: 100px; height: 100px;">
+    <div class="pulse-ring" style="width: 100px; height: 100px; animation-delay: 0.3s;"></div>
+    <div style="width: 70px; height: 70px; background: linear-gradient(135deg, #f093fb, #f5576c); border-radius: 50%; position: absolute; top: 15px; left: 15px; box-shadow: 0 0 40px #f093fb;"></div>
+  </div>
+</div>
+
+<!-- Main Content -->
+<div style="position: relative; z-index: 10; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; padding: 40px 20px; text-align: center;">
+  
+  <!-- Header Badge -->
+  <div style="animation: slide-in-up 0.8s ease-out; animation-fill-mode: both;">
+    <div style="display: inline-flex; align-items: center; gap: 10px; background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 50px; padding: 10px 30px; margin-bottom: 30px;">
+      <span style="font-size: 24px;">🌟</span>
+      <span style="color: #fff; font-weight: 600; font-size: 14px; letter-spacing: 2px;">NASA SPACE APPS CHALLENGE</span>
+      <span style="font-size: 24px;">🚀</span>
+    </div>
+  </div>
+
+  <!-- Epic Title -->
+  <div style="animation: slide-in-up 0.8s ease-out 0.2s; animation-fill-mode: both;">
+    <h1 class="title-cosmic" style="font-size: clamp(40px, 8vw, 100px); line-height: 1.1; margin-bottom: 30px;">
+      EXPLORE THE<br/>
+      <span style="font-size: clamp(50px, 10vw, 120px);">COSMOS</span>
+    </h1>
+  </div>
+
+  <!-- Subtitle -->
+  <div style="animation: slide-in-up 0.8s ease-out 0.4s; animation-fill-mode: both;">
+    <p style="color: rgba(255, 255, 255, 0.85); font-size: clamp(16px, 2vw, 22px); line-height: 1.6; max-width: 700px; margin: 0 auto 50px; font-weight: 400;">
+      Embark on an epic journey through the universe. Discover thousands of exoplanets, 
+      explore distant solar systems, and uncover the mysteries of worlds beyond our own.
+    </p>
+  </div>
+
+  <!-- CTA Button -->
+  <div style="animation: slide-in-up 0.8s ease-out 0.6s; animation-fill-mode: both; margin-bottom: 60px;">
+    <a href="/buscar" style="text-decoration: none;">
+      <button class="cosmic-button">
+        <span style="position: relative; z-index: 1; display: flex; align-items: center; gap: 15px;">
+          <span>🌍</span>
+          <span>START EXPLORATION</span>
+          <span>🛸</span>
+        </span>
+      </button>
+    </a>
+  </div>
+
+  <!-- Stats Cards -->
+  <div style="animation: slide-in-up 0.8s ease-out 0.8s; animation-fill-mode: both; display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; max-width: 900px;">
+    
+    <div class="stats-card" style="flex: 1; min-width: 200px;">
+      <div style="font-size: 42px; font-weight: 800; background: linear-gradient(135deg, #667eea, #764ba2); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+        5,500+
+      </div>
+      <div style="color: rgba(255, 255, 255, 0.7); font-size: 14px; margin-top: 5px; text-transform: uppercase; letter-spacing: 1px;">
+        Exoplanets Discovered
+      </div>
+    </div>
+
+    <div class="stats-card" style="flex: 1; min-width: 200px;">
+      <div style="font-size: 42px; font-weight: 800; background: linear-gradient(135deg, #f093fb, #f5576c); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+        3D
+      </div>
+      <div style="color: rgba(255, 255, 255, 0.7); font-size: 14px; margin-top: 5px; text-transform: uppercase; letter-spacing: 1px;">
+        Interactive Universe
+      </div>
+    </div>
+
+    <div class="stats-card" style="flex: 1; min-width: 200px;">
+      <div style="font-size: 42px; font-weight: 800; background: linear-gradient(135deg, #4facfe, #00f2fe); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+        ∞
+      </div>
+      <div style="color: rgba(255, 255, 255, 0.7); font-size: 14px; margin-top: 5px; text-transform: uppercase; letter-spacing: 1px;">
+        Infinite Possibilities
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- Generate Stars with JavaScript -->
+<script>
+  const starfield = document.querySelector('.starfield');
+  for (let i = 0; i < 200; i++) {
+    const star = document.createElement('div');
+    star.className = 'star';
+    star.style.left = Math.random() * 100 + '%';
+    star.style.top = Math.random() * 100 + '%';
+    star.style.animationDelay = Math.random() * 3 + 's';
+    star.style.animationDuration = (2 + Math.random() * 4) + 's';
+    starfield.appendChild(star);
+  }
+</script>
+
+</body>
+</html>

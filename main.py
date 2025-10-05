@@ -1,6 +1,31 @@
-def main():
-    print("Hello from nasa-space-apps-challenge!")
+from flask import Flask, render_template
+
+app = Flask(__name__, template_folder="frontend/templates", static_folder="frontend/static")
+
+@app.route('/')
+def inicio():
+    return render_template('Inicio.html')
+
+@app.route('/buscar')
+def buscar():
+    return render_template('buscar.html')
+
+@app.route('/detalles')
+def detalles():
+    return render_template('detalles.html')
 
 
-if __name__ == "__main__":
-    main()
+@app.route('/mapa')
+def mapa():
+    return render_template('mapa.html')
+
+@app.route('/comunidad')
+def comunidad():
+    return render_template('comunidad.html')
+
+@app.route('/model')
+def model():
+    return render_template('model.html')
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=80, debug=True)
