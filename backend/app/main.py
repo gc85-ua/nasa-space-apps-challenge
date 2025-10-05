@@ -18,7 +18,7 @@ app.add_middleware(
 app.include_router(ml_router)
 @app.get("/")
 async def read_root():
-    return Response(content={"message": "Welcome to the Exoplanet prediction API"}, media_type="application/json", status_code=200)
+    return Response(content=json.dumps({"message": "Welcome to the Exoplanet prediction API"},ensure_ascii=False), media_type="application/json", status_code=200)
 
 @app.get("/models")
 async def list_models():

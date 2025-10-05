@@ -95,30 +95,37 @@
 <header class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-lg">
 <div class="container mx-auto px-4 sm:px-6 lg:px-8">
 <div class="flex items-center justify-between h-16 border-b border-gray-200 dark:border-gray-800">
-<div class="flex items-center gap-4">
-<div class="size-8 text-primary">
-<svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-<path clip-rule="evenodd" d="M39.475 21.6262C40.358 21.4363 40.6863 21.5589 40.7581 21.5934C40.7876 21.655 40.8547 21.857 40.8082 22.3336C40.7408 23.0255 40.4502 24.0046 39.8572 25.2301C38.6799 27.6631 36.5085 30.6631 33.5858 33.5858C30.6631 36.5085 27.6632 38.6799 25.2301 39.8572C24.0046 40.4502 23.0255 40.7407 22.3336 40.8082C21.8571 40.8547 21.6551 40.7875 21.5934 40.7581C21.5589 40.6863 21.4363 40.358 21.6262 39.475C21.8562 38.4054 22.4689 36.9657 23.5038 35.2817C24.7575 33.2417 26.5497 30.9744 28.7621 28.762C30.9744 26.5497 33.2417 24.7574 35.2817 23.5037C36.9657 22.4689 38.4054 21.8562 39.475 21.6262ZM4.41189 29.2403L18.7597 43.5881C19.8813 44.7097 21.4027 44.9179 22.7217 44.7893C24.0585 44.659 25.5148 44.1631 26.9723 43.4579C29.9052 42.0387 33.2618 39.5667 36.4142 36.4142C39.5667 33.2618 42.0387 29.9052 43.4579 26.9723C44.1631 25.5148 44.659 24.0585 44.7893 22.7217C44.9179 21.4027 44.7097 19.8813 43.5881 18.7597L29.2403 4.41187C27.8527 3.02428 25.8765 3.02573 24.2861 3.36776C22.6081 3.72863 20.7334 4.58419 18.8396 5.74801C16.4978 7.18716 13.9881 9.18353 11.5858 11.5858C9.18354 13.988 7.18717 16.4978 5.74802 18.8396C4.58421 20.7334 3.72865 22.6081 3.36778 24.2861C3.02574 25.8765 3.02429 27.8527 4.41189 29.2403Z" fill="currentColor" fill-rule="evenodd"></path>
-</svg>
-</div>
-<h1 class="text-xl font-bold tracking-tighter">Cosmic Explorer</h1>
-</div>
-<nav class="hidden md:flex items-center gap-6">
-<a class="text-sm font-medium hover:text-primary transition-colors" href="/">Home</a>
-<a class="text-sm font-medium hover:text-primary transition-colors" href="/mapa">Explore</a>
-<a class="text-sm font-medium hover:text-primary transition-colors" href="/buscar">Search</a>
-<a class="text-sm font-medium hover:text-primary transition-colors" href="/comunidad">Community</a>
-<a class="text-sm font-medium hover:text-primary transition-colors" href="/model">Model</a>
-</nav>
-<div class="flex items-center gap-4">
-<button class="p-2 rounded-full text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
-<svg fill="currentColor" height="20" viewBox="0 0 256 256" width="20" xmlns="http://www.w3.org/2000/svg">
-<path d="M221.8,175.94C216.25,166.38,208,139.33,208,104a80,80,0,1,0-160,0c0,35.34-8.26,62.38-13.81,71.94A16,16,0,0,0,48,200H88.81a40,40,0,0,0,78.38,0H208a16,16,0,0,0,13.8-24.06ZM128,216a24,24,0,0,1-22.62-16h45.24A24,24,0,0,1,128,216ZM48,184c7.7-13.24,16-43.92,16-80a64,64,0,1,1,128,0c0,36.05,8.28,66.73,16,80Z"></path>
-</svg>
-</button>
-<div class="size-10 rounded-full bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBrLpPCHU1eGQtBO8G17pWP-xFAdYx2v7TJENhbjy-jgYFpUSU2mZbcZELR4MzjF4H81YWIvKhbTgu3xXXQkAwOGAZjYkiDvn13Z0wLrIwEbSlD9t6Xj5qvFINNblGpbib6sjpLI3MjttN2E_txYp3h_CwNDVVqCJqgxAcArmQeM1mL-8SUiPXBZgXuBytxFpnCEAJi4ku7Goi-IZvoQerk1yi7FCbEIneGEjo0-GYhMEwCUc89yfLVa-Vh40aQiDlZKCYyqVFo1Bo");'></div>
+    <div class="flex items-center gap-4">
+        <div class="size-8 text-primary">
+            <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+            <path clip-rule="evenodd" d="M39.475 21.6262C40.358 21.4363 40.6863 21.5589 40.7581 21.5934C40.7876 21.655 40.8547 21.857 40.8082 22.3336C40.7408 23.0255 40.4502 24.0046 39.8572 25.2301C38.6799 27.6631 36.5085 30.6631 33.5858 33.5858C30.6631 36.5085 27.6632 38.6799 25.2301 39.8572C24.0046 40.4502 23.0255 40.7407 22.3336 40.8082C21.8571 40.8547 21.6551 40.7875 21.5934 40.7581C21.5589 40.6863 21.4363 40.358 21.6262 39.475C21.8562 38.4054 22.4689 36.9657 23.5038 35.2817C24.7575 33.2417 26.5497 30.9744 28.7621 28.762C30.9744 26.5497 33.2417 24.7574 35.2817 23.5037C36.9657 22.4689 38.4054 21.8562 39.475 21.6262ZM4.41189 29.2403L18.7597 43.5881C19.8813 44.7097 21.4027 44.9179 22.7217 44.7893C24.0585 44.659 25.5148 44.1631 26.9723 43.4579C29.9052 42.0387 33.2618 39.5667 36.4142 36.4142C39.5667 33.2618 42.0387 29.9052 43.4579 26.9723C44.1631 25.5148 44.659 24.0585 44.7893 22.7217C44.9179 21.4027 44.7097 19.8813 43.5881 18.7597L29.2403 4.41187C27.8527 3.02428 25.8765 3.02573 24.2861 3.36776C22.6081 3.72863 20.7334 4.58419 18.8396 5.74801C16.4978 7.18716 13.9881 9.18353 11.5858 11.5858C9.18354 13.988 7.18717 16.4978 5.74802 18.8396C4.58421 20.7334 3.72865 22.6081 3.36778 24.2861C3.02574 25.8765 3.02429 27.8527 4.41189 29.2403Z" fill="currentColor" fill-rule="evenodd"></path>
+            </svg>
+        </div>
+        <h1 class="text-xl font-bold tracking-tighter">Cosmic Explorer</h1>
+    </div>
+    <nav class="hidden md:flex items-center gap-6">
+        <a class="text-sm font-medium hover:text-primary transition-colors" href="/">Home</a>
+        <a class="text-sm font-medium hover:text-primary transition-colors" href="/mapa">Explore</a>
+        <a class="text-sm font-medium hover:text-primary transition-colors" href="/buscar">Search</a>
+        <a class="text-sm font-medium hover:text-primary transition-colors" href="/comunidad">Community</a>
+        <a class="text-sm font-medium hover:text-primary transition-colors" href="/model">Model</a>
+    </nav>
+    <div class="flex items-center gap-4 md:hidden">
+        <button id="mobile-menu-button" class="p-2 rounded-md text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+        </button>
+    </div>
 </div>
 </div>
+<!-- Mobile menu, show/hide based on menu state. -->
+<div class="md:hidden hidden" id="mobile-menu">
+    <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+        <a href="/" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700">Home</a>
+        <a href="/mapa" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700">Explore</a>
+        <a href="/buscar" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700">Search</a>
+        <a href="/comunidad" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700">Community</a>
+        <a href="/model" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700">Model</a>
+    </div>
 </div>
 </header>
 
@@ -157,7 +164,7 @@
           <div id="congrats-placeholder" class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-3xl font-bold text-yellow-300 tracking-wider" style="opacity: 0; text-shadow: 0 0 10px #fde047;">CONGRATULATIONS</div>
         </div>
         <h3 class="text-2xl font-bold tracking-tighter mb-4">Training Results</h3>
-        <div class="flex justify-around text-center">
+        <div class="flex flex-col sm:flex-row justify-around text-center">
           <div>
             <h4 class="font-semibold text-sm text-gray-500 dark:text-gray-400">New agent accuracy</h4>
             <p id="agent-accuracy" class="text-primary font-bold text-2xl">92.3%</p>
@@ -215,6 +222,11 @@
 </div>
 
 <script>
+  document.getElementById('mobile-menu-button').addEventListener('click', function() {
+    var menu = document.getElementById('mobile-menu');
+    menu.classList.toggle('hidden');
+  });
+
   document.getElementById("upload-form").addEventListener("submit", function(event) {
     event.preventDefault();
     const fileInput = document.getElementById("csv-file");

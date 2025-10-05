@@ -70,6 +70,26 @@
     #btn-earth {
       animation: fadeInScale 0.5s ease-out 0.2s backwards;
     }
+
+    @media (max-width: 640px) {
+      #search-panel {
+        top: 1rem;
+        right: 1rem;
+        left: 1rem;
+        min-width: 0;
+        width: auto;
+      }
+      #btn-earth {
+        bottom: 1rem;
+        right: 1rem;
+        padding: 10px 20px;
+        font-size: 14px;
+      }
+      #stats-panel {
+        bottom: 1rem;
+        left: 1rem;
+      }
+    }
   </style>
 </head>
 <body class="bg-background-light dark:bg-background-dark text-white">
