@@ -14,6 +14,7 @@ from sklearn.pipeline import Pipeline
 from sklearn.model_selection import RandomizedSearchCV
 from scipy.stats import randint
 import joblib
+from tabulate import tabulate
 
 class RandomForestModel:
     model_pipeline = None
@@ -54,21 +55,77 @@ class RandomForestModel:
         
         # evaluate the model
         y_pred = self.model_pipeline.predict(X_test)
-        print("Classification report:")
-        print(classification_report(y_test, y_pred))
-        print("Confusion matrix:")
+        
+        # Get classification metrics
+        from sklearn.metrics import precision_score, recall_score, f1_score, accuracy_score
+        accuracy = accuracy_score(y_test, y_pred)
+        precision = precision_score(y_test, y_pred, average='weighted', zero_division=0)
+        recall = recall_score(y_test, y_pred, average='weighted', zero_division=0)
+        f1 = f1_score(y_test, y_pred, average='weighted', zero_division=0)
+        
+        # Confusion matrix
         conf_mtrx = confusion_matrix(y_test, y_pred)
-        print(conf_mtrx)
-        precision = (conf_mtrx[0][0] + conf_mtrx[1][1]) / np.sum(conf_mtrx)
-        print(f"Precision: {precision}")
         
         # cross-validation
         cv = RepeatedKFold(n_splits=5, n_repeats=5, random_state=42)
         scores = cross_val_score(self.model_pipeline, X, y, scoring='accuracy', cv=cv, n_jobs=-1)
-        print(f"Cross-validated accuracy: {np.mean(scores)}")
-        print(f"Standard deviation of accuracy: {np.std(scores)}")
+        cv_mean = np.mean(scores)
+        cv_std = np.std(scores)
+        
+        # Print results as formatted tables
+        print("\n" + "="*70)
+        print("MODEL TRAINING RESULTS")
+        print("="*70)
+        
+        # Dataset information table
+        print("\n📊 DATASET INFORMATION:")
+        dataset_info = [
+            ["Training samples", X_train.shape[0]],
+            ["Testing samples", X_test.shape[0]],
+            ["Number of features", X_train.shape[1]],
+            ["Total samples", X.shape[0]]
+        ]
+        print(tabulate(dataset_info, headers=["Metric", "Value"], tablefmt="grid"))
+        
+        # Classification metrics table
+        print("\n📈 CLASSIFICATION METRICS:")
+        metrics_table = [
+            ["Accuracy", f"{accuracy:.4f}"],
+            ["Precision", f"{precision:.4f}"],
+            ["Recall", f"{recall:.4f}"],
+            ["F1-Score", f"{f1:.4f}"]
+        ]
+        print(tabulate(metrics_table, headers=["Metric", "Score"], tablefmt="grid"))
+        
+        # Confusion matrix
+        print("\n🎯 CONFUSION MATRIX:")
+        cm_data = [
+            ["True Negatives", conf_mtrx[0][0], "False Positives", conf_mtrx[0][1]],
+            ["False Negatives", conf_mtrx[1][0], "True Positives", conf_mtrx[1][1]]
+        ]
+        print(tabulate(cm_data, headers=["", "Predicted Negative", "", "Predicted Positive"], tablefmt="grid"))
+        
+        # Cross-validation results table
+        print("\n🔄 CROSS-VALIDATION RESULTS (RepeatedKFold: 5 splits, 5 repeats):")
+        cv_table = [
+            ["Mean Accuracy", f"{cv_mean:.4f}"],
+            ["Standard Deviation", f"{cv_std:.4f}"]
+        ]
+        print(tabulate(cv_table, headers=["Metric", "Value"], tablefmt="grid"))
+        
+        print("\n" + "="*70 + "\n")
+        
         self.trained = True
-        return {"confusion_matrix": conf_mtrx.tolist(), "precision": precision, "cv_accuracy": np.mean(scores), "cv_method":"RepeatedKFold(n_splits=5, n_repeats=5)", "cv_std": np.std(scores)}
+        return {
+            "confusion_matrix": conf_mtrx.tolist(), 
+            "precision": precision, 
+            "recall": recall,
+            "f1_score": f1,
+            "accuracy": accuracy,
+            "cv_accuracy": cv_mean, 
+            "cv_method": "RepeatedKFold(n_splits=5, n_repeats=5)", 
+            "cv_std": cv_std
+        }
 
     def predict(self, X):
         if not self.trained:
@@ -101,8 +158,17 @@ class RandomForestModel:
         y = self.data_source[target_column]
         X_train, X_test, y_train, y_test = train_test_split(X, y, train_size=0.7, random_state=42)
         random_search.fit(X_train, y_train)
-        print("Best Parameters:", random_search.best_params_)
-        print("Best Score:", random_search.best_score_)
+        print("\n" + "="*70)
+        print("HYPERPARAMETER TUNING RESULTS (RandomizedSearchCV)")
+        print("="*70)
+        
+        print("\n🔧 BEST PARAMETERS FOUND:")
+        best_params_list = [[key, value] for key, value in random_search.best_params_.items()]
+        print(tabulate(best_params_list, headers=["Parameter", "Value"], tablefmt="grid"))
+        
+        print("\n✅ BEST SCORE:", f"{random_search.best_score_:.4f}")
+        print("="*70 + "\n")
+        
         self.model_pipeline = random_search.best_estimator_
         joblib.dump(self.model_pipeline, "./random_forest_model.joblib")
         self.trained = True
@@ -118,7 +184,22 @@ if __name__ == "__main__":
     rf_model = RandomForestModel()
     rf_model.load_data_source("../raw-data/merged_data.csv")
     metrics = rf_model.train(target_column='disposition',not_features=[])
-    print("Training metrics: ", metrics)
+    
+    # Print summary table of all metrics
+    print("\n" + "="*70)
+    print("FINAL METRICS SUMMARY")
+    print("="*70)
+    summary_table = [
+        ["Accuracy", f"{metrics['accuracy']:.4f}"],
+        ["Precision", f"{metrics['precision']:.4f}"],
+        ["Recall", f"{metrics['recall']:.4f}"],
+        ["F1-Score", f"{metrics['f1_score']:.4f}"],
+        ["Cross-Validation Accuracy", f"{metrics['cv_accuracy']:.4f}"],
+        ["CV Std Deviation", f"{metrics['cv_std']:.4f}"]
+    ]
+    print(tabulate(summary_table, headers=["Metric", "Value"], tablefmt="fancy_grid"))
+    print("="*70 + "\n")
+    
     # hyperparameter tuning doesn't seem to improve the model in this case
     #best_params = rf_model.random_grid_search(target_column='disposition', not_features=[])
     #print("Best hyperparameters from random grid search: ", best_params)
