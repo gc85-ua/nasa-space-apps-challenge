@@ -77,16 +77,6 @@ class RandomForestModel:
         print("MODEL TRAINING RESULTS")
         print("="*70)
         
-        # Dataset information table
-        print("\n📊 DATASET INFORMATION:")
-        dataset_info = [
-            ["Training samples", X_train.shape[0]],
-            ["Testing samples", X_test.shape[0]],
-            ["Number of features", X_train.shape[1]],
-            ["Total samples", X.shape[0]]
-        ]
-        print(tabulate(dataset_info, headers=["Metric", "Value"], tablefmt="grid"))
-        
         # Classification metrics table
         print("\n📈 CLASSIFICATION METRICS:")
         metrics_table = [
